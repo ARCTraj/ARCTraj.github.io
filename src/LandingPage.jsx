@@ -144,8 +144,23 @@ export default function LandingPage() {
   const [lightbox, setLightbox] = useState(null);
 
   const containerRef = useRef(null);
+  const heroRef = useRef(null);
+  const [showNav, setShowNav] = useState(false);
   const openLightbox = useCallback((src, alt) => setLightbox({ src, alt }), []);
   const closeLightbox = useCallback(() => setLightbox(null), []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    const hero = heroRef.current;
+    if (!container || !hero) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowNav(!entry.isIntersecting),
+      { root: container, threshold: 0.1 }
+    );
+    observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
     const container = containerRef.current;
@@ -196,8 +211,45 @@ export default function LandingPage() {
   return (
     <div ref={containerRef} className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
+
+      {/* Fixed bottom nav */}
+      <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[#0E0E0E]/90 backdrop-blur-sm border-t border-[#212121] py-3 px-4 transition-all duration-300 ${showNav ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
+        <div className="flex justify-center gap-6 text-sm text-gray-400">
+          <a
+            href="https://arxiv.org/abs/2506.05292"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 13H8v-2h2v2zm4 0h-2v-2h2v2zm0-4H8v-2h6v2z" />
+            </svg>
+            Paper
+          </a>
+          <a
+            href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
+          >
+            <img src="/hf-logo.svg" alt="HF" className="w-3.5 h-3.5 opacity-50" />
+            Dataset
+          </a>
+          <Link
+            to="/viewer"
+            className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
+          >
+            <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+            Demo
+          </Link>
+        </div>
+      </div>
+
       {/* Hero Section */}
-      <section className="min-h-screen snap-start flex flex-col items-center justify-center px-4">
+      <section ref={heroRef} className="min-h-screen snap-start flex flex-col items-center justify-center px-4">
         <div className="max-w-screen-md w-full mx-auto text-center">
           <h1
             className="text-6xl md:text-8xl font-black mb-6 tracking-tight"
@@ -536,36 +588,6 @@ export default function LandingPage() {
             </pre>
           </div>
         </div>
-        {/* Footer */}
-        <footer className="mt-auto pt-10">
-        <div className="max-w-screen-md mx-auto text-center text-sm text-gray-500">
-          <div className="flex justify-center gap-6 mb-4">
-            <a
-              href="https://arxiv.org/abs/2506.05292"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gray-300 transition-colors"
-            >
-              arXiv
-            </a>
-            <a
-              href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gray-300 transition-colors"
-            >
-              HuggingFace
-            </a>
-            <Link
-              to="/viewer"
-              className="hover:text-gray-300 transition-colors"
-            >
-              Demo
-            </Link>
-          </div>
-          <p>ARCTraj &copy; 2026</p>
-        </div>
-        </footer>
       </section>
     </div>
   );
