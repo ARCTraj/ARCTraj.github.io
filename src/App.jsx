@@ -8,11 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/viewer" element={
-          <div className="min-h-screen bg-black text-white">
-            <ArcTrajViewer />
-          </div>
-        } />
+        <Route path="/viewer" element={<ArcTrajViewer />} />
       </Routes>
     </BrowserRouter>
   );

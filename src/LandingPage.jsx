@@ -572,6 +572,60 @@ export default function LandingPage() {
         </div>
       </section>
 
+      {/* Interactive Demo Guide */}
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+        <div className="max-w-screen-md mx-auto">
+          <SectionTitle>Interactive Demo</SectionTitle>
+          <p className="text-gray-300 leading-relaxed text-base mb-8">
+            Explore real human problem-solving trajectories from ARCTraj directly in your browser.
+          </p>
+          <div className="space-y-4">
+            {[
+              {
+                step: "1",
+                title: "Select a Task",
+                description: "After the dataset finishes loading, the left panel lists all 400 ARC tasks. Click a task ID to expand its log list.",
+              },
+              {
+                step: "2",
+                title: "Choose a Log",
+                description: "Each log represents one human attempt at solving the task, sorted by score in descending order. The score (0\u2013100,000) is determined by O2ARC 3.0 — faster submissions with fewer actions score higher, while incorrect answers receive 0.",
+              },
+              {
+                step: "3",
+                title: "Navigate Steps",
+                description: "Use the left/right arrow keys (or swipe on mobile) to step through the trajectory. Each step shows the current grid state, the next operation, and highlights the selected region.",
+              },
+            ].map((item) => (
+              <div
+                key={item.step}
+                className="flex gap-4 items-start border border-[#212121] rounded-xl p-5 bg-[#141414] hover:border-[#333] transition-colors"
+              >
+                <span className="text-[#5A9485] font-bold text-lg shrink-0 w-6 text-center" style={{ fontFamily: "'Montserrat', sans-serif" }}>
+                  {item.step}
+                </span>
+                <div>
+                  <h3 className="text-white font-semibold mb-1">{item.title}</h3>
+                  <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-8 flex justify-center">
+            <Link
+              to="/viewer"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#5A9485] text-white font-medium text-sm hover:bg-[#4a8374] transition-colors"
+            >
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+                <circle cx="12" cy="12" r="3" />
+              </svg>
+              Launch Demo
+            </Link>
+          </div>
+        </div>
+      </section>
+
       {/* BibTeX / Footer Section */}
       <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">

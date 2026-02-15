@@ -147,57 +147,73 @@ export default function ArcTrajViewer() {
   }, [trajectory]);
 
   return (
-    //<div className="flex flex-col min-h-screen w-[calc(100vw-1rem)] overflow-hidden font-sans">
-    <div className="flex flex-col min-h w-[calc(100vw-1rem)] overflow-hidden font-sans">
+    <div className="flex flex-col h-screen w-full overflow-hidden bg-[#0E0E0E] text-white">
       {/* 상단 헤더 */}
-      <div className="bg-gray-900 text-white py-4 px-6 shadow-md flex items-center gap-4">
+      <div className="border-b border-[#212121] py-3 px-6 flex items-center gap-4">
         <Link
           to="/"
-          className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1 shrink-0"
+          className="text-gray-400 hover:text-[#5A9485] transition-colors text-sm flex items-center gap-1.5 shrink-0"
         >
-          &larr; Back to Home
+          <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          Home
         </Link>
         <div className="flex-grow text-center">
-          <h1 className="text-2xl font-black">ARCTraj Viewer</h1>
+          <h1
+            className="text-xl font-bold tracking-tight"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
+            ARCTraj Interactive Demo
+          </h1>
         </div>
-        <div className="flex gap-3 shrink-0">
+        <div className="flex gap-2 shrink-0">
           <a
             href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded flex items-center gap-2 text-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
           >
             <img src="/hf-logo.svg" alt="HF" className="w-4 h-4" />
             Dataset
           </a>
           <a
-            href="/ARCTraj_paper.pdf"
+            href="https://arxiv.org/abs/2506.05292"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded flex items-center gap-2 text-sm"
+            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
           >
-            <img src="/pdf-logo.svg" alt="PDF" className="w-4 h-4" />
+            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 13H8v-2h2v2zm4 0h-2v-2h2v2zm0-4H8v-2h6v2z" />
+            </svg>
             Paper
           </a>
         </div>
       </div>
 
       {/* 본문 레이아웃 */}
-      <div className="flex flex-grow w-full">
-                {/* 왼쪽 사이드바 */}
-        <div className="w-[28rem] h-[calc(100vh-12rem)] overflow-y-auto bg-gray-900 text-white flex flex-col">
-          <div className="sticky top-0 z-10 bg-gray-900 py-3">
-            <h2 className="text-lg font-semibold pl-4">📁 Tasks</h2>
+      <div className="flex flex-grow overflow-hidden">
+        {/* 왼쪽 사이드바 */}
+        <div className="w-64 shrink-0 overflow-y-auto bg-[#141414] border-r border-[#212121] flex flex-col">
+          <div className="sticky top-0 z-10 bg-[#141414] border-b border-[#212121] py-3 px-4">
+            <h2
+              className="text-sm font-semibold text-gray-300 uppercase tracking-wider"
+              style={{ fontFamily: "'Montserrat', sans-serif" }}
+            >
+              Tasks
+            </h2>
           </div>
           {loading ? (
-            <p className="text-gray-400 pl-4">Loading tasks...</p>
+            <p className="text-gray-500 text-sm px-4 py-3">Loading tasks...</p>
           ) : (
-              <ul className="px-4 space-y-1">
+            <ul className="px-2 py-2 space-y-0.5">
               {tasks.map((task) => (
                 <li key={task.id} className="flex flex-col">
                   <div
-                    className={`cursor-pointer px-2 py-1 rounded hover:bg-gray-700 ${
-                      selectedTaskId === task.id ? "bg-gray-700" : ""
+                    className={`cursor-pointer px-3 py-1.5 rounded-lg text-sm font-mono transition-colors ${
+                      selectedTaskId === task.id
+                        ? "bg-[#5A9485]/20 text-[#5A9485] border border-[#5A9485]/30"
+                        : "hover:bg-[#1a1a1a] text-gray-300 border border-transparent"
                     }`}
                     onClick={() => {
                       if (selectedTaskId === task.id) {
@@ -215,19 +231,21 @@ export default function ArcTrajViewer() {
                   </div>
 
                   {selectedTaskId === task.id && (
-                    <ul className="ml-2 mt-1 space-y-1 border-l border-gray-700 pl-2 max-h-48 overflow-y-auto">
+                    <ul className="ml-3 mt-1 mb-1 space-y-0.5 border-l border-[#333] pl-2 max-h-48 overflow-y-auto">
                       {task.logs.map((log) => (
                         <li
                           key={log.logId}
-                          className={`cursor-pointer px-2 py-1 rounded hover:bg-gray-700 ${
-                            selectedLogId === log.logId ? "bg-gray-700" : ""
+                          className={`cursor-pointer px-2 py-1 rounded text-xs transition-colors ${
+                            selectedLogId === log.logId
+                              ? "bg-[#5A9485]/20 text-[#5A9485]"
+                              : "hover:bg-[#1a1a1a] text-gray-400"
                           }`}
                           onClick={() => {
                             setSelectedLogId(log.logId);
                             setStep(0);
                           }}
                         >
-                          log #{log.logId} (score: {log.score})
+                          log #{log.logId} <span className="text-gray-500">(score: {log.score})</span>
                         </li>
                       ))}
                     </ul>
@@ -239,13 +257,16 @@ export default function ArcTrajViewer() {
         </div>
 
         {/* 오른쪽 Trajectory Viewer */}
-        <div className="flex-grow bg-black text-white pt-3 pr-6 pb-6 pl-6 flex flex-col items-start">
-          <h1 className="text-xl font-bold mb-4">🔍 Trajectory Viewer</h1>
+        <div className="flex-grow p-6 flex flex-col items-start overflow-auto">
           {currentState ? (
             <div>
-              <p className="mb-2">Step {step}: {currentState.action}</p>
+              <p className="mb-3 text-sm text-gray-400">
+                Step <span className="text-white font-medium">{step}</span>
+                <span className="mx-2 text-[#333]">|</span>
+                <span className="text-gray-300">{currentState.action}</span>
+              </p>
               <div
-                className="grid gap-1"
+                className="grid gap-0.5"
                 style={{
                   gridTemplateColumns: `repeat(${currentState.grid[0].length}, minmax(0, 2.5rem))`
                 }}
@@ -255,14 +276,16 @@ export default function ArcTrajViewer() {
                     const objectHere = currentState.objects.find(o => o.x === x && o.y === y);
                     const isSelected = objectHere !== undefined;
                     const colorClass = colorMap[objectHere ? objectHere.color : val] || "bg-gray-300";
-                    const extraClass = isSelected ? "outline outline-2 outline-white" : "";
-                    return <div key={`${x}-${y}`} className={`w-10 h-10 ${colorClass} border ${extraClass}`} />;
+                    const extraClass = isSelected ? "ring-2 ring-[#5A9485]" : "";
+                    return <div key={`${x}-${y}`} className={`w-10 h-10 ${colorClass} ${extraClass}`} />;
                   })
                 )}
               </div>
             </div>
           ) : (
-            <p className="text-gray-400 pl-4">Please Select Task and Log.</p>
+            <div className="flex-grow flex items-center justify-center w-full">
+              <p className="text-gray-500 text-sm">Select a task and log to view the trajectory.</p>
+            </div>
           )}
         </div>
       </div>
