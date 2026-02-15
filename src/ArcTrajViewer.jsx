@@ -240,15 +240,6 @@ export default function ArcTrajViewer() {
         </div>
         <div className="flex gap-2 shrink-0">
           <a
-            href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
-          >
-            <img src="/hf-logo.svg" alt="HF" className="w-4 h-4" />
-            <span className="hidden md:inline">Dataset</span>
-          </a>
-          <a
             href="https://arxiv.org/abs/2506.05292"
             target="_blank"
             rel="noopener noreferrer"
@@ -258,6 +249,15 @@ export default function ArcTrajViewer() {
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 13H8v-2h2v2zm4 0h-2v-2h2v2zm0-4H8v-2h6v2z" />
             </svg>
             <span className="hidden md:inline">Paper</span>
+          </a>
+          <a
+            href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
+          >
+            <img src="/hf-logo.svg" alt="HF" className="w-4 h-4" />
+            <span className="hidden md:inline">Dataset</span>
           </a>
         </div>
       </div>
