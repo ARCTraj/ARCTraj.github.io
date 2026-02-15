@@ -55,6 +55,7 @@ export default function ArcTrajViewer() {
   const [selectedLogId, setSelectedLogId] = useState(null);
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   useEffect(() => {
     Promise.all(CSV_FILES.map(path => fetch(path).then(res => res.text())))
@@ -149,7 +150,7 @@ export default function ArcTrajViewer() {
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden bg-[#0E0E0E] text-white">
       {/* 상단 헤더 */}
-      <div className="border-b border-[#212121] py-3 px-6 flex items-center gap-4">
+      <div className="border-b border-[#212121] py-3 px-4 md:px-6 flex items-center gap-2 md:gap-4">
         <Link
           to="/"
           className="text-gray-400 hover:text-[#5A9485] transition-colors text-sm flex items-center gap-1.5 shrink-0"
@@ -157,11 +158,23 @@ export default function ArcTrajViewer() {
           <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M19 12H5M12 19l-7-7 7-7" />
           </svg>
-          Home
+          <span className="hidden md:inline">Home</span>
         </Link>
+        {/* Mobile: sidebar toggle */}
+        <button
+          onClick={() => setSidebarOpen(!sidebarOpen)}
+          className="md:hidden text-gray-400 hover:text-white transition-colors p-1"
+        >
+          <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            {sidebarOpen
+              ? <path d="M18 6L6 18M6 6l12 12" />
+              : <path d="M3 12h18M3 6h18M3 18h18" />
+            }
+          </svg>
+        </button>
         <div className="flex-grow text-center">
           <h1
-            className="text-xl font-bold tracking-tight"
+            className="text-base md:text-xl font-bold tracking-tight"
             style={{ fontFamily: "'Montserrat', sans-serif" }}
           >
             ARCTraj Interactive Demo
@@ -172,29 +185,42 @@ export default function ArcTrajViewer() {
             href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
+            className="inline-flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
           >
             <img src="/hf-logo.svg" alt="HF" className="w-4 h-4" />
-            Dataset
+            <span className="hidden md:inline">Dataset</span>
           </a>
           <a
             href="https://arxiv.org/abs/2506.05292"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
+            className="inline-flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
           >
             <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
               <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 13H8v-2h2v2zm4 0h-2v-2h2v2zm0-4H8v-2h6v2z" />
             </svg>
-            Paper
+            <span className="hidden md:inline">Paper</span>
           </a>
         </div>
       </div>
 
       {/* 본문 레이아웃 */}
-      <div className="flex flex-grow overflow-hidden">
+      <div className="flex flex-grow overflow-hidden relative">
+        {/* 모바일 오버레이 배경 */}
+        {sidebarOpen && (
+          <div
+            className="md:hidden fixed inset-0 bg-black/50 z-20"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
         {/* 왼쪽 사이드바 */}
-        <div className="w-64 shrink-0 overflow-y-auto bg-[#141414] border-r border-[#212121] flex flex-col">
+        <div className={`
+          fixed md:relative z-30 md:z-auto
+          w-64 shrink-0 h-[calc(100vh-3.5rem)] overflow-y-auto
+          bg-[#141414] border-r border-[#212121] flex flex-col
+          transition-transform duration-200
+          ${sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"}
+        `}>
           <div className="sticky top-0 z-10 bg-[#141414] border-b border-[#212121] py-3 px-4">
             <h2
               className="text-sm font-semibold text-gray-300 uppercase tracking-wider"
@@ -243,6 +269,7 @@ export default function ArcTrajViewer() {
                           onClick={() => {
                             setSelectedLogId(log.logId);
                             setStep(0);
+                            setSidebarOpen(false);
                           }}
                         >
                           log #{log.logId} <span className="text-gray-500">(score: {log.score})</span>
