@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
+import { Link } from "react-router-dom";
 import Papa from "papaparse";
 
 const HARDCODED_TASK_IDS = [
@@ -149,28 +150,33 @@ export default function ArcTrajViewer() {
     //<div className="flex flex-col min-h-screen w-[calc(100vw-1rem)] overflow-hidden font-sans">
     <div className="flex flex-col min-h w-[calc(100vw-1rem)] overflow-hidden font-sans">
       {/* 상단 헤더 */}
-      <div className="bg-gray-900 text-white text-center py-6 shadow-md">
-        <h1 className="text-4xl font-black mb-2">ARCTraj</h1>
-        <p className="text-xl text-gray-300 mb-4">
-          Human Reasoning Trajectories Collected From Interactive Sessions On The Abstraction and Reasoning Corpus
-        </p>
-        <div className="flex justify-center gap-4">
+      <div className="bg-gray-900 text-white py-4 px-6 shadow-md flex items-center gap-4">
+        <Link
+          to="/"
+          className="text-gray-400 hover:text-white transition-colors text-sm flex items-center gap-1 shrink-0"
+        >
+          &larr; Back to Home
+        </Link>
+        <div className="flex-grow text-center">
+          <h1 className="text-2xl font-black">ARCTraj Viewer</h1>
+        </div>
+        <div className="flex gap-3 shrink-0">
           <a
             href="https://huggingface.co/datasets/SejinKimm/ARCTraj"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded flex items-center gap-2"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded flex items-center gap-2 text-sm"
           >
-            <img src="./hf-logo.svg" alt="HF" className="w-5 h-5" />
-            Hugging Face
+            <img src="/hf-logo.svg" alt="HF" className="w-4 h-4" />
+            Dataset
           </a>
           <a
-            href="./ARCTraj_paper.pdf"
+            href="/ARCTraj_paper.pdf"
             target="_blank"
             rel="noopener noreferrer"
-            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded flex items-center gap-2"
+            className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-1.5 px-3 rounded flex items-center gap-2 text-sm"
           >
-            <img src="./pdf-logo.svg" alt="PDF" className="w-5 h-5" />
+            <img src="/pdf-logo.svg" alt="PDF" className="w-4 h-4" />
             Paper
           </a>
         </div>
