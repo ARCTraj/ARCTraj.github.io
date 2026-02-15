@@ -1,12 +1,33 @@
-# React + Vite
+# ARCTraj
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Project page for **"ARCTraj: A Dataset and Benchmark of Human Reasoning Trajectories for Abstract Problem Solving"** (KDD 2026 Datasets and Benchmarks).
 
-Currently, two official plugins are available:
+**Website**: https://arctraj.github.io
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Authors
 
-## Expanding the ESLint configuration
+Sejin Kim, Hayan Choi, Seokki Lee, Sundong Kim
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Links
+
+- [Paper (arXiv)](https://arxiv.org/abs/2506.05292)
+- [Dataset (HuggingFace)](https://huggingface.co/datasets/SejinKimm/ARCTraj)
+- [Interactive Demo](https://arctraj.github.io/demo)
+
+## Development
+
+```bash
+npm install
+npm run dev
+```
+
+## Citation
+
+```bibtex
+@inproceedings{kim2026arctraj,
+  title={ARCTraj: A Dataset and Benchmark of Human Reasoning Trajectories for Abstract Problem Solving},
+  author={Kim, Sejin and Choi, Hayan and Lee, Seokki and Kim, Sundong},
+  booktitle={Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining: Datasets and Benchmarks},
+  year={2026}
+}
+```
