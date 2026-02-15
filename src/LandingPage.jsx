@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import { Link } from "react-router-dom";
 
 const AUTHORS = [
   { name: "Sejin Kim", href: "https://sejinkimm.github.io/" },
-  { name: "Hayan Choi" },
+  { name: "Hayan Choi", href: "https://scholar.google.com/citations?user=JkTCZP4AAAAJ" },
   { name: "Seokki Lee", href: "https://albertree.com/" },
   { name: "Sundong Kim", href: "https://sundong.kim/" },
 ];
@@ -17,8 +17,29 @@ const BIBTEX = `@inproceedings{kim2026arctraj,
 
 const ABSTRACT = `As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the Abstraction and Reasoning Corpus (ARC). Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations—including object selection, color changes, movements, rotations, and other transformations—along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.`;
 
-function SectionDivider() {
-  return <div className="border-t border-[#212121] w-full" />;
+function Lightbox({ src, alt, onClose }) {
+  useEffect(() => {
+    const handleKey = (e) => { if (e.key === "Escape") onClose(); };
+    document.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
+  }, [onClose]);
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm cursor-zoom-out"
+      onClick={onClose}
+    >
+      <img
+        src={src}
+        alt={alt || ""}
+        className="max-w-[90vw] max-h-[90vh] object-contain rounded-lg shadow-2xl cursor-zoom-out"
+      />
+    </div>
+  );
 }
 
 function SectionTitle({ children }) {
@@ -32,10 +53,13 @@ function SectionTitle({ children }) {
   );
 }
 
-function FigureCard({ src, alt, title, description, children }) {
+function FigureCard({ src, alt, title, description, children, onImageClick }) {
   return (
     <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors h-full flex flex-col">
-      <div className="bg-white p-4">
+      <div
+        className="bg-white p-4 cursor-zoom-in"
+        onClick={() => onImageClick && src && onImageClick(src, alt)}
+      >
         {children || (
           <img src={src} alt={alt} className="w-full" />
         )}
@@ -58,11 +82,14 @@ function FigureCard({ src, alt, title, description, children }) {
   );
 }
 
-function AppCard({ src, alt, title, description, links }) {
+function AppCard({ src, alt, title, description, links, onImageClick }) {
   const linkList = Array.isArray(links) ? links : [{ label: "Paper", href: links }];
   return (
     <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
-      <div className="bg-white p-4">
+      <div
+        className="bg-white p-4 cursor-zoom-in"
+        onClick={() => onImageClick && onImageClick(src, alt)}
+      >
         <img src={src} alt={alt} className="w-full" />
       </div>
       <div className="p-5">
@@ -114,6 +141,51 @@ function LinkButton({ href, children, external = true }) {
 
 export default function LandingPage() {
   const [copied, setCopied] = useState(false);
+  const [lightbox, setLightbox] = useState(null);
+
+  const containerRef = useRef(null);
+  const openLightbox = useCallback((src, alt) => setLightbox({ src, alt }), []);
+  const closeLightbox = useCallback(() => setLightbox(null), []);
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleKeyDown = (e) => {
+      if (lightbox) return;
+      const keys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
+      if (!keys.includes(e.key)) return;
+
+      e.preventDefault();
+      const sections = container.querySelectorAll(":scope > section");
+      const scrollTop = container.scrollTop;
+      const threshold = 10;
+
+      if (e.key === "Home") {
+        sections[0]?.scrollIntoView({ behavior: "smooth" });
+      } else if (e.key === "End") {
+        sections[sections.length - 1]?.scrollIntoView({ behavior: "smooth" });
+      } else if (e.key === "ArrowDown" || e.key === "PageDown") {
+        for (const s of sections) {
+          if (s.offsetTop > scrollTop + threshold) {
+            s.scrollIntoView({ behavior: "smooth" });
+            break;
+          }
+        }
+      } else {
+        const reversed = [...sections].reverse();
+        for (const s of reversed) {
+          if (s.offsetTop < scrollTop - threshold) {
+            s.scrollIntoView({ behavior: "smooth" });
+            break;
+          }
+        }
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightbox]);
 
   const handleCopyBibtex = () => {
     navigator.clipboard.writeText(BIBTEX);
@@ -122,9 +194,10 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0E0E0E] text-white">
+    <div ref={containerRef} className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
+      {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
       {/* Hero Section */}
-      <section className="min-h-screen flex flex-col items-center justify-center px-4">
+      <section className="min-h-screen snap-start flex flex-col items-center justify-center px-4">
         <div className="max-w-screen-md w-full mx-auto text-center">
           <h1
             className="text-6xl md:text-8xl font-black mb-6 tracking-tight"
@@ -186,28 +259,27 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Abstract Section */}
-      <section className="py-20 px-4">
-        <div className="max-w-screen-md mx-auto">
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+        <div className="max-w-screen-lg mx-auto">
           <SectionTitle>Abstract</SectionTitle>
-          <p className="text-gray-300 leading-relaxed text-base">{ABSTRACT}</p>
-          <div className="mt-10">
-            <FigureCard
-              src="/figures/arc_task_examples_2tasks.png"
-              alt="Examples of ARC tasks: demonstration input-output pairs and test input with unknown output"
-              title="ARC Task Examples"
-              description="Each task consists of demonstration input-output pairs that define a hidden transformation rule, and a test input for which the solver must produce the correct output."
-            />
+          <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
+            <p className="text-gray-300 leading-relaxed text-base">{ABSTRACT}</p>
+            <div className="w-72">
+              <FigureCard
+                src="/figures/arc_task_examples_2tasks.png"
+                alt="Examples of ARC tasks: demonstration input-output pairs and test input with unknown output"
+                title="ARC Task Examples"
+                description="Each task consists of demonstration input-output pairs that define a hidden transformation rule, and a test input for which the solver must produce the correct output."
+                onImageClick={openLightbox}
+              />
+            </div>
           </div>
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Data Collection Platform */}
-      <section className="py-20 px-4">
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Dataset Construction</SectionTitle>
           <div className="border border-[#212121] rounded-xl bg-[#141414] p-6 hover:border-[#333] transition-colors">
@@ -235,12 +307,14 @@ export default function LandingPage() {
               alt="Data generation process: Humans solve ARC tasks, generating task-solving trajectories that are logged into the ARCTraj dataset"
               title="Data Generation Pipeline"
               description="Humans solve ARC tasks through an interactive interface, generating object-oriented action trajectories logged as structured step sequences — resulting in 10,000+ annotated human trajectories."
+              onImageClick={openLightbox}
             />
             <FigureCard
               src="/figures/arctraj_actionsequence_vertical.png"
               alt="ARCTraj action sequence structure showing logId, userId, taskId, and detailed operation steps"
               title="Action Sequence Structure"
               description="Each trajectory records the complete sequence of grid states, selected objects, operation types, and categories — capturing how humans incrementally build solutions through selection, coloring, and submission."
+              onImageClick={openLightbox}
             />
           </div>
           {/* Dataset Summary Statistics */}
@@ -277,10 +351,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Key Contributions Section */}
-      <section className="py-20 px-4">
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Key Contributions</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -314,10 +386,8 @@ export default function LandingPage() {
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Analysis Highlights Section */}
-      <section className="py-20 px-4">
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Analysis Highlights</SectionTitle>
           <FigureCard
@@ -325,6 +395,7 @@ export default function LandingPage() {
             alt="Analysis pipeline: extracting selection biases, color origins, and shared intentions from ARCTraj dataset"
             title="Overview"
             description="From the ARCTraj dataset, we extract three categories of benchmarking analyses — selection biases revealing where humans focus, color origins uncovering hidden patterns in color usage, and shared intentions identifying common problem-solving strategies across participants."
+            onImageClick={openLightbox}
           />
           <div
             className="mt-8 grid grid-cols-1 md:grid-cols-[3fr_4fr_5fr] gap-6"
@@ -335,10 +406,11 @@ export default function LandingPage() {
               alt="Heatmap of selection size distribution showing width vs height patterns"
               title="Selection Biases"
               description="Humans predominantly select small, compact regions — suggesting object-level rather than pixel-level reasoning."
+              onImageClick={openLightbox}
             />
             {/* Color Origins */}
             <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors h-full flex flex-col">
-              <div className="bg-white p-4">
+              <div className="bg-white p-4 cursor-zoom-in">
                 <div className="grid grid-cols-2 gap-2">
                   {[3, 4].map((n) => (
                     <img
@@ -346,6 +418,7 @@ export default function LandingPage() {
                       src={`/figures/trajectory_ratios_${n}.png`}
                       alt={`Trajectory ratio distribution ${n}`}
                       className="w-full"
+                      onClick={() => openLightbox(`/figures/trajectory_ratios_${n}.png`, `Trajectory ratio distribution ${n}`)}
                     />
                   ))}
                 </div>
@@ -391,20 +464,16 @@ export default function LandingPage() {
               alt="Unique trajectory ratio distribution and example trajectory showing shared intentionality"
               title="Shared Intentions"
               description="Many tasks show convergent solving strategies, indicating common reasoning pathways across participants."
+              onImageClick={openLightbox}
             />
           </div>
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* Downstream Applications Section */}
-      <section className="py-20 px-4">
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Downstream Applications</SectionTitle>
-          <p className="text-gray-400 text-base mb-10 leading-relaxed">
-            ARCTraj enables trajectory-based learning approaches across multiple paradigms, including sequential decision-making, generative modeling, and reinforcement learning.
-          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <AppCard
               src="/figures/decision_transformer.png"
@@ -415,6 +484,7 @@ export default function LandingPage() {
                 { label: "ICML '23 Workshop", href: "https://arxiv.org/abs/2306.08204" },
                 { label: "KDD '25", href: "https://dl.acm.org/doi/10.1145/3711896.3736831" },
               ]}
+              onImageClick={openLightbox}
             />
             <AppCard
               src="/figures/gflownet_diagram.png"
@@ -422,6 +492,7 @@ export default function LandingPage() {
               title="GFlowNet"
               description="Generates diverse action sequences by modeling the distribution over trajectories proportional to a reward function."
               links={[{ label: "TMLR '25", href: "https://tmlr.infinite-conf.org/paper_pages/ULCOhBgGzy.html" }]}
+              onImageClick={openLightbox}
             />
             <AppCard
               src="/figures/ldcq_pipeline.png"
@@ -429,6 +500,7 @@ export default function LandingPage() {
               title="Offline RL with Latent Diffusion"
               description="Combines diffusion model sampling with Q-network evaluation to generate and select high-quality candidate actions in the latent space."
               links={[{ label: "arXiv '24", href: "https://arxiv.org/abs/2410.11324" }]}
+              onImageClick={openLightbox}
             />
             <AppCard
               src="/figures/world_model_learning.png"
@@ -436,15 +508,14 @@ export default function LandingPage() {
               title="DreamerV3"
               description="Learns a latent dynamics model that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning."
               links={[{ label: "IJCAI '24 Workshop", href: "https://arxiv.org/abs/2408.14855" }]}
+              onImageClick={openLightbox}
             />
           </div>
         </div>
       </section>
 
-      <SectionDivider />
-
       {/* BibTeX / Footer Section */}
-      <section className="py-20 px-4">
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Citation</SectionTitle>
           <div className="relative bg-[#141414] border border-[#212121] rounded-xl p-6">
@@ -459,10 +530,8 @@ export default function LandingPage() {
             </pre>
           </div>
         </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="border-t border-[#212121] py-10 px-4">
+        {/* Footer */}
+        <footer className="mt-auto pt-10">
         <div className="max-w-screen-md mx-auto text-center text-sm text-gray-500">
           <div className="flex justify-center gap-6 mb-4">
             <a
@@ -490,7 +559,8 @@ export default function LandingPage() {
           </div>
           <p>ARCTraj &copy; 2026</p>
         </div>
-      </footer>
+        </footer>
+      </section>
     </div>
   );
 }
