@@ -84,7 +84,7 @@ export default function ArcTrajViewer() {
   const viewerRef = useRef(null);
   const [cellSize, setCellSize] = useState(40);
   const [arcTask, setArcTask] = useState(null);
-  const [showTask, setShowTask] = useState(false);
+  const [showTask, setShowTask] = useState(true);
 
   useEffect(() => {
     Promise.all(CSV_FILES.map(path => fetch(path).then(res => res.text())))
