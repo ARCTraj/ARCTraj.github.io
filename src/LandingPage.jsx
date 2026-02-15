@@ -407,7 +407,13 @@ export default function LandingPage() {
               title="Selection Biases"
               description="Humans predominantly select small, compact regions — suggesting object-level rather than pixel-level reasoning."
               onImageClick={openLightbox}
-            />
+            >
+              <img
+                src="/figures/heatmap_selection_size_distribution.png"
+                alt="Heatmap of selection size distribution showing width vs height patterns"
+                className="w-1/2 md:w-full mx-auto"
+              />
+            </FigureCard>
             {/* Color Origins */}
             <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors h-full flex flex-col">
               <div className="bg-white p-4 cursor-zoom-in">
