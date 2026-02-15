@@ -160,6 +160,17 @@ export default function LandingPage() {
             Abstract
           </h2>
           <p className="text-gray-300 leading-relaxed text-base">{ABSTRACT}</p>
+          {/* ARC task examples */}
+          <div className="mt-10 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/arc_task_examples_2tasks.png"
+              alt="Examples of ARC tasks: demonstration input-output pairs and test input with unknown output"
+              className="w-full"
+            />
+          </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Examples of ARC tasks with demonstration pairs and test problems
+          </p>
         </div>
       </section>
 
@@ -189,10 +200,28 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
-          {/* Pipeline figure placeholder */}
-          <div className="mt-10 border border-dashed border-[#333] rounded-xl p-12 flex items-center justify-center text-gray-500 text-sm">
-            Pipeline overview figure (to be added)
+          {/* Data generation pipeline */}
+          <div className="mt-10 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/data_generation_process.png"
+              alt="Data generation process: Humans solve ARC tasks, generating task-solving trajectories that are logged into the ARCTraj dataset"
+              className="w-full"
+            />
           </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Overview of the ARCTraj data generation process
+          </p>
+          {/* Action sequence structure */}
+          <div className="mt-10 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/arctraj_actionsequence_vertical.png"
+              alt="ARCTraj action sequence structure showing logId, userId, taskId, and detailed operation steps"
+              className="w-full"
+            />
+          </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Structure of the ARCTraj action sequence data
+          </p>
         </div>
       </section>
 
@@ -222,10 +251,136 @@ export default function LandingPage() {
               </div>
             ))}
           </div>
-          {/* Analysis figure placeholder */}
-          <div className="mt-10 border border-dashed border-[#333] rounded-xl p-12 flex items-center justify-center text-gray-500 text-sm">
-            Analysis figures (to be added)
+          {/* Analysis overview */}
+          <div className="mt-10 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/analysis_with_trajectory.png"
+              alt="Analysis pipeline: extracting selection biases, color origins, and shared intentions from ARCTraj dataset"
+              className="w-full"
+            />
           </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Benchmarking analyses extracted from ARCTraj
+          </p>
+          {/* Uniqueness analysis + Selection bias heatmap */}
+          <div className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="rounded-xl overflow-hidden bg-white p-4">
+                <img
+                  src="/figures/uniqueness_analysis.png"
+                  alt="Unique trajectory ratio distribution and example trajectory showing shared intentionality"
+                  className="w-full"
+                />
+              </div>
+              <p className="mt-3 text-center text-gray-500 text-sm">
+                Unique trajectory ratio analysis
+              </p>
+            </div>
+            <div>
+              <div className="rounded-xl overflow-hidden bg-white p-4">
+                <img
+                  src="/figures/heatmap_selection_size_distribution.png"
+                  alt="Heatmap of selection size distribution showing width vs height patterns"
+                  className="w-full"
+                />
+              </div>
+              <p className="mt-3 text-center text-gray-500 text-sm">
+                Selection size distribution heatmap
+              </p>
+            </div>
+          </div>
+          {/* Selection number distribution */}
+          <div className="mt-10 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/histogram_selection_number_distribution.png"
+              alt="Histogram of selected pixels count distribution"
+              className="w-full"
+            />
+          </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Distribution of selected pixel counts across trajectories
+          </p>
+          {/* Trajectory ratios 2x2 grid */}
+          <div className="mt-10 grid grid-cols-2 gap-4">
+            {[1, 2, 3, 4].map((n) => (
+              <div key={n} className="rounded-xl overflow-hidden bg-white p-3">
+                <img
+                  src={`/figures/trajectory_ratios_${n}.png`}
+                  alt={`Trajectory ratio distribution ${n}`}
+                  className="w-full"
+                />
+              </div>
+            ))}
+          </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Trajectory ratio distributions across different action categories
+          </p>
+        </div>
+      </section>
+
+      <SectionDivider />
+
+      {/* Downstream Applications Section */}
+      <section className="py-20 px-4">
+        <div className="max-w-screen-md mx-auto">
+          <h2
+            className="text-3xl font-bold mb-4"
+            style={{ fontFamily: "'Montserrat', sans-serif" }}
+          >
+            Downstream Applications
+          </h2>
+          <p className="text-gray-400 text-base mb-10 leading-relaxed">
+            ARCTraj enables trajectory-based learning approaches across multiple paradigms, including sequential decision-making, generative modeling, and reinforcement learning.
+          </p>
+          {/* Decision Transformer + GFlowNet side by side */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <div className="rounded-xl overflow-hidden bg-white p-4">
+                <img
+                  src="/figures/decision_transformer.png"
+                  alt="Decision Transformer architecture for trajectory-based learning on ARC"
+                  className="w-full"
+                />
+              </div>
+              <p className="mt-3 text-center text-gray-500 text-sm">
+                Decision Transformer
+              </p>
+            </div>
+            <div>
+              <div className="rounded-xl overflow-hidden bg-white p-4">
+                <img
+                  src="/figures/gflownet_diagram.png"
+                  alt="GFlowNet action generation and state transition through ARCLE"
+                  className="w-full"
+                />
+              </div>
+              <p className="mt-3 text-center text-gray-500 text-sm">
+                GFlowNet
+              </p>
+            </div>
+          </div>
+          {/* LDCQ pipeline - full width */}
+          <div className="mt-8 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/ldcq_pipeline.png"
+              alt="LDCQ pipeline with diffusion model sampling and Q-network for action prediction"
+              className="w-full"
+            />
+          </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            Latent Diffusion for Candidate Q-values (LDCQ)
+          </p>
+          {/* World Model Learning */}
+          <div className="mt-8 rounded-xl overflow-hidden bg-white p-4">
+            <img
+              src="/figures/world_model_learning.png"
+              alt="World model learning with encoder-decoder architecture for state prediction"
+              className="w-full"
+            />
+          </div>
+          <p className="mt-3 text-center text-gray-500 text-sm">
+            World Model Learning
+          </p>
         </div>
       </section>
 
