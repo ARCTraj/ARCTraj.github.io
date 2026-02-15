@@ -49,6 +49,31 @@ const colorMap = {
   9: "bg-rose-800"
 };
 
+const ARC_BASE_URL = "https://raw.githubusercontent.com/fchollet/ARC-AGI/master/data/training";
+
+function MiniGrid({ grid, maxSize = 80 }) {
+  if (!grid || !grid.length) return null;
+  const rows = grid.length;
+  const cols = grid[0].length;
+  const cell = Math.max(Math.floor(Math.min(maxSize / cols, maxSize / rows)), 2);
+  return (
+    <div
+      className="grid shrink-0"
+      style={{ gridTemplateColumns: `repeat(${cols}, ${cell}px)`, gap: "1px" }}
+    >
+      {grid.map((row, y) =>
+        row.map((val, x) => (
+          <div
+            key={`${x}-${y}`}
+            className={colorMap[val] || "bg-gray-300"}
+            style={{ width: cell, height: cell }}
+          />
+        ))
+      )}
+    </div>
+  );
+}
+
 export default function ArcTrajViewer() {
   const [tasks, setTasks] = useState([]);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
@@ -58,6 +83,8 @@ export default function ArcTrajViewer() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const viewerRef = useRef(null);
   const [cellSize, setCellSize] = useState(40);
+  const [arcTask, setArcTask] = useState(null);
+  const [showTask, setShowTask] = useState(false);
 
   useEffect(() => {
     Promise.all(CSV_FILES.map(path => fetch(path).then(res => res.text())))
@@ -105,6 +132,15 @@ export default function ArcTrajViewer() {
         setLoading(false);
       });
   }, []);
+
+  useEffect(() => {
+    if (!selectedTaskId) { setArcTask(null); return; }
+    setArcTask(null);
+    fetch(`${ARC_BASE_URL}/${selectedTaskId}.json`)
+      .then(res => res.ok ? res.json() : null)
+      .then(data => setArcTask(data))
+      .catch(() => setArcTask(null));
+  }, [selectedTaskId]);
 
   const selectedTask = tasks.find(task => task.id === selectedTaskId);
   const selectedLog = selectedTask?.logs.find(log => log.logId === selectedLogId);
@@ -306,7 +342,55 @@ export default function ArcTrajViewer() {
         </div>
 
         {/* 오른쪽 Trajectory Viewer */}
-        <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-hidden">
+        <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-auto">
+          {/* ARC Task toggle */}
+          {selectedTaskId && arcTask && (
+            <div className="w-full mb-3">
+              <button
+                onClick={() => setShowTask(!showTask)}
+                className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors mb-2"
+              >
+                <svg className={`w-3 h-3 transition-transform ${showTask ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M8 5l8 7-8 7z" />
+                </svg>
+                Task: {selectedTaskId}
+              </button>
+              {showTask && (
+                <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1">
+                  <div className="flex flex-wrap gap-4">
+                    {arcTask.train.map((pair, i) => (
+                      <div key={i} className="flex items-center gap-2">
+                        <div className="text-center">
+                          <p className="text-[10px] text-gray-500 mb-1">In {i + 1}</p>
+                          <MiniGrid grid={pair.input} />
+                        </div>
+                        <svg className="w-3 h-3 text-gray-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        <div className="text-center">
+                          <p className="text-[10px] text-gray-500 mb-1">Out {i + 1}</p>
+                          <MiniGrid grid={pair.output} />
+                        </div>
+                      </div>
+                    ))}
+                    <div className="flex items-center gap-2">
+                      <div className="text-center">
+                        <p className="text-[10px] text-[#5A9485] mb-1 font-medium">Test</p>
+                        <MiniGrid grid={arcTask.test[0].input} />
+                      </div>
+                      <svg className="w-3 h-3 text-gray-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M5 12h14M12 5l7 7-7 7" />
+                      </svg>
+                      <div className="text-center">
+                        <p className="text-[10px] text-gray-500 mb-1">?</p>
+                        <div className="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs">?</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
           {currentState ? (
             <div>
               <p className="mb-3 text-sm text-gray-400">
