@@ -287,9 +287,7 @@ export default function ArcTrajViewer() {
               Tasks
             </h2>
           </div>
-          {loading ? (
-            <p className="text-gray-500 text-sm px-4 py-3">Loading tasks...</p>
-          ) : (
+          {!loading && (
             <ul className="px-2 py-2 space-y-0.5">
               {tasks.map((task) => (
                 <li key={task.id} className="flex flex-col">
