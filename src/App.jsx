@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage />} />
-        <Route path="/viewer" element={<ArcTrajViewer />} />
+        <Route path="/demo" element={<ArcTrajViewer />} />
       </Routes>
     </BrowserRouter>
   );

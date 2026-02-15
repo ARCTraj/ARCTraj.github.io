@@ -236,7 +236,7 @@ export default function LandingPage() {
             Dataset
           </a>
           <Link
-            to="/viewer"
+            to="/demo"
             className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
           >
             <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -294,7 +294,7 @@ export default function LandingPage() {
               <img src="/hf-logo.svg" alt="HF" className="w-4 h-4" />
               Dataset
             </LinkButton>
-            <LinkButton href="/viewer" external={false}>
+            <LinkButton href="/demo" external={false}>
               <svg
                 className="w-4 h-4"
                 viewBox="0 0 24 24"
@@ -613,7 +613,7 @@ export default function LandingPage() {
           </div>
           <div className="mt-8 flex justify-center">
             <Link
-              to="/viewer"
+              to="/demo"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-[#5A9485] text-white font-medium text-sm hover:bg-[#4a8374] transition-colors"
             >
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
