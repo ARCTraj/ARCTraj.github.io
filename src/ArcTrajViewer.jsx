@@ -448,10 +448,20 @@ export default function ArcTrajViewer() {
             </div>
           ) : (
             <div className="flex-grow flex flex-col items-center justify-center w-full gap-3">
-              <p className="text-gray-500 text-sm">Select a task and log to view the trajectory.</p>
+              {loading ? (
+                <>
+                  <svg className="w-6 h-6 text-[#5A9485] animate-spin" viewBox="0 0 24 24" fill="none">
+                    <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                    <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z" />
+                  </svg>
+                  <p className="text-gray-500 text-sm">Loading tasks...</p>
+                </>
+              ) : (
+                <p className="text-gray-500 text-sm">Select a task and log to view the trajectory.</p>
+              )}
               <button
                 onClick={() => setSidebarOpen(true)}
-                className="md:hidden inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-gray-300 hover:border-[#5A9485] transition-colors"
+                className={`md:hidden inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-gray-300 hover:border-[#5A9485] transition-colors ${loading ? "hidden" : ""}`}
               >
                 <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M3 12h18M3 6h18M3 18h18" />
