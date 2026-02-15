@@ -59,20 +59,6 @@ export default function ArcTrajViewer() {
   const viewerRef = useRef(null);
   const [cellSize, setCellSize] = useState(40);
 
-  const updateCellSize = useCallback(() => {
-    if (!currentState || !viewerRef.current) return;
-    const el = viewerRef.current;
-    const cols = currentState.grid[0].length;
-    const rows = currentState.grid.length;
-    const gap = 2;
-    const padding = 48; // p-6 = 24px * 2
-    const reservedHeight = 120; // step info + nav buttons
-    const availW = el.clientWidth - padding - (cols - 1) * gap;
-    const availH = el.clientHeight - reservedHeight - (rows - 1) * gap;
-    const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
-    setCellSize(Math.max(size, 4));
-  }, [currentState]);
-
   useEffect(() => {
     Promise.all(CSV_FILES.map(path => fetch(path).then(res => res.text())))
       .then(fileTexts => {
@@ -124,6 +110,20 @@ export default function ArcTrajViewer() {
   const selectedLog = selectedTask?.logs.find(log => log.logId === selectedLogId);
   const trajectory = useMemo(() => selectedLog?.trajectory || [], [selectedLog]);
   const currentState = trajectory[step];
+
+  const updateCellSize = useCallback(() => {
+    if (!currentState || !viewerRef.current) return;
+    const el = viewerRef.current;
+    const cols = currentState.grid[0].length;
+    const rows = currentState.grid.length;
+    const gap = 2;
+    const padding = 48;
+    const reservedHeight = 120;
+    const availW = el.clientWidth - padding - (cols - 1) * gap;
+    const availH = el.clientHeight - reservedHeight - (rows - 1) * gap;
+    const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
+    setCellSize(Math.max(size, 4));
+  }, [currentState]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
