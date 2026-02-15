@@ -308,10 +308,43 @@ export default function ArcTrajViewer() {
                   })
                 )}
               </div>
+              {/* Step navigation buttons */}
+              <div className="flex items-center gap-4 mt-4">
+                <button
+                  onClick={() => setStep(prev => Math.max(prev - 1, 0))}
+                  disabled={step === 0}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                  Prev
+                </button>
+                <span className="text-xs text-gray-500">{step + 1} / {trajectory.length}</span>
+                <button
+                  onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
+                  disabled={step === trajectory.length - 1}
+                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
+                >
+                  Next
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
             </div>
           ) : (
-            <div className="flex-grow flex items-center justify-center w-full">
+            <div className="flex-grow flex flex-col items-center justify-center w-full gap-3">
               <p className="text-gray-500 text-sm">Select a task and log to view the trajectory.</p>
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="md:hidden inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-gray-300 hover:border-[#5A9485] transition-colors"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M3 12h18M3 6h18M3 18h18" />
+                </svg>
+                Open Task List
+              </button>
             </div>
           )}
         </div>
