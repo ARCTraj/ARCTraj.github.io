@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
 import { Link } from "react-router-dom";
 import Papa from "papaparse";
 
@@ -56,6 +56,22 @@ export default function ArcTrajViewer() {
   const [step, setStep] = useState(0);
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const viewerRef = useRef(null);
+  const [cellSize, setCellSize] = useState(40);
+
+  const updateCellSize = useCallback(() => {
+    if (!currentState || !viewerRef.current) return;
+    const el = viewerRef.current;
+    const cols = currentState.grid[0].length;
+    const rows = currentState.grid.length;
+    const gap = 2;
+    const padding = 48; // p-6 = 24px * 2
+    const reservedHeight = 120; // step info + nav buttons
+    const availW = el.clientWidth - padding - (cols - 1) * gap;
+    const availH = el.clientHeight - reservedHeight - (rows - 1) * gap;
+    const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
+    setCellSize(Math.max(size, 4));
+  }, [currentState]);
 
   useEffect(() => {
     Promise.all(CSV_FILES.map(path => fetch(path).then(res => res.text())))
@@ -146,6 +162,12 @@ export default function ArcTrajViewer() {
       window.removeEventListener("touchend", handleTouchEnd);
     };
   }, [trajectory]);
+
+  useEffect(() => {
+    updateCellSize();
+    window.addEventListener("resize", updateCellSize);
+    return () => window.removeEventListener("resize", updateCellSize);
+  }, [updateCellSize]);
 
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden bg-[#0E0E0E] text-white">
@@ -284,7 +306,7 @@ export default function ArcTrajViewer() {
         </div>
 
         {/* 오른쪽 Trajectory Viewer */}
-        <div className="flex-grow p-6 flex flex-col items-start overflow-auto">
+        <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-hidden">
           {currentState ? (
             <div>
               <p className="mb-3 text-sm text-gray-400">
@@ -293,9 +315,10 @@ export default function ArcTrajViewer() {
                 <span className="text-gray-300">{currentState.action}</span>
               </p>
               <div
-                className="grid gap-0.5"
+                className="grid"
                 style={{
-                  gridTemplateColumns: `repeat(${currentState.grid[0].length}, minmax(0, 2.5rem))`
+                  gridTemplateColumns: `repeat(${currentState.grid[0].length}, ${cellSize}px)`,
+                  gap: "2px"
                 }}
               >
                 {currentState.grid.map((row, y) =>
@@ -304,7 +327,13 @@ export default function ArcTrajViewer() {
                     const isSelected = objectHere !== undefined;
                     const colorClass = colorMap[objectHere ? objectHere.color : val] || "bg-gray-300";
                     const extraClass = isSelected ? "ring-2 ring-[#5A9485]" : "";
-                    return <div key={`${x}-${y}`} className={`w-10 h-10 ${colorClass} ${extraClass}`} />;
+                    return (
+                      <div
+                        key={`${x}-${y}`}
+                        className={`${colorClass} ${extraClass}`}
+                        style={{ width: cellSize, height: cellSize }}
+                      />
+                    );
                   })
                 )}
               </div>
