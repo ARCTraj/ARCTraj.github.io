@@ -209,7 +209,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-auto snap-y snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
+    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
 
       {/* Fixed bottom nav */}
@@ -637,7 +637,7 @@ export default function LandingPage() {
             >
               {copied ? "Copied!" : "Copy"}
             </button>
-            <pre className="text-sm text-gray-300 overflow-x-auto whitespace-pre font-mono">
+            <pre className="text-sm text-gray-300 overflow-x-auto whitespace-pre-wrap break-all font-mono">
               {BIBTEX}
             </pre>
           </div>
