@@ -166,6 +166,14 @@ export default function LandingPage() {
     const container = containerRef.current;
     if (!container) return;
 
+    const scrollWithoutSnap = (top) => {
+      container.style.scrollSnapType = 'none';
+      container.scrollTo({ top, behavior: "smooth" });
+      const restore = () => { container.style.scrollSnapType = ''; };
+      container.addEventListener('scrollend', restore, { once: true });
+      setTimeout(restore, 1000);
+    };
+
     const handleKeyDown = (e) => {
       if (lightbox) return;
       const keys = ["ArrowDown", "ArrowUp", "PageDown", "PageUp", "Home", "End"];
@@ -174,6 +182,7 @@ export default function LandingPage() {
       e.preventDefault();
       const sections = container.querySelectorAll(":scope > section");
       const scrollTop = container.scrollTop;
+      const viewportHeight = container.clientHeight;
       const threshold = 10;
 
       if (e.key === "Home") {
@@ -181,18 +190,39 @@ export default function LandingPage() {
       } else if (e.key === "End") {
         sections[sections.length - 1]?.scrollIntoView({ behavior: "smooth" });
       } else if (e.key === "ArrowDown" || e.key === "PageDown") {
+        let currentSection = null;
         for (const s of sections) {
-          if (s.offsetTop > scrollTop + threshold) {
-            s.scrollIntoView({ behavior: "smooth" });
-            break;
+          if (s.offsetTop <= scrollTop + threshold) currentSection = s;
+        }
+        if (currentSection) {
+          const sectionBottom = currentSection.offsetTop + currentSection.offsetHeight;
+          if (sectionBottom > scrollTop + viewportHeight + threshold) {
+            scrollWithoutSnap(Math.min(scrollTop + viewportHeight, sectionBottom - viewportHeight));
+          } else {
+            for (const s of sections) {
+              if (s.offsetTop > scrollTop + threshold) {
+                s.scrollIntoView({ behavior: "smooth" });
+                break;
+              }
+            }
           }
         }
       } else {
-        const reversed = [...sections].reverse();
-        for (const s of reversed) {
-          if (s.offsetTop < scrollTop - threshold) {
-            s.scrollIntoView({ behavior: "smooth" });
-            break;
+        let currentSection = null;
+        for (const s of sections) {
+          if (s.offsetTop <= scrollTop + threshold) currentSection = s;
+        }
+        if (currentSection) {
+          if (currentSection.offsetTop < scrollTop - threshold) {
+            scrollWithoutSnap(Math.max(currentSection.offsetTop, scrollTop - viewportHeight));
+          } else {
+            const reversed = [...sections].reverse();
+            for (const s of reversed) {
+              if (s.offsetTop < scrollTop - threshold) {
+                s.scrollIntoView({ behavior: "smooth" });
+                break;
+              }
+            }
           }
         }
       }
@@ -209,7 +239,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
+    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-proximity scroll-smooth bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
 
       {/* Fixed bottom nav */}
