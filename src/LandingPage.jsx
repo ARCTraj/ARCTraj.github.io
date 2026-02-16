@@ -209,7 +209,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
+    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-proximity md:snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
 
       {/* Fixed bottom nav */}
@@ -312,7 +312,7 @@ export default function LandingPage() {
       </section>
 
       {/* Abstract Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-lg mx-auto">
           <SectionTitle>Abstract</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
@@ -331,7 +331,7 @@ export default function LandingPage() {
       </section>
 
       {/* Data Collection Platform */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Dataset Construction</SectionTitle>
           <div className="border border-[#212121] rounded-xl bg-[#141414] p-6 hover:border-[#333] transition-colors">
@@ -404,7 +404,7 @@ export default function LandingPage() {
       </section>
 
       {/* Key Contributions Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Key Contributions</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -439,7 +439,7 @@ export default function LandingPage() {
       </section>
 
       {/* Analysis Highlights Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Analysis Highlights</SectionTitle>
           <FigureCard
@@ -529,7 +529,7 @@ export default function LandingPage() {
       </section>
 
       {/* Downstream Applications Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Downstream Applications</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -573,7 +573,7 @@ export default function LandingPage() {
       </section>
 
       {/* Interactive Demo Guide */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Interactive Demo</SectionTitle>
           <p className="text-gray-300 leading-relaxed text-base mb-8">
@@ -627,7 +627,7 @@ export default function LandingPage() {
       </section>
 
       {/* BibTeX / Footer Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section className="min-h-screen snap-start border-t border-[#212121] pt-20 pb-[50vh] md:py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Citation</SectionTitle>
           <div className="relative bg-[#141414] border border-[#212121] rounded-xl p-6">
