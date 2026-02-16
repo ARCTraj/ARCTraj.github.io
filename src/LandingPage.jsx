@@ -15,7 +15,7 @@ const BIBTEX = `@inproceedings{kim2026arctraj,
   year={2026}
 }`;
 
-const ABSTRACT = `As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the Abstraction and Reasoning Corpus (ARC). Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations—including object selection, color changes, movements, rotations, and other transformations—along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.`;
+const ABSTRACT = `As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the Abstraction and Reasoning Corpus (ARC). Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations, including object selection, color changes, movements, rotations, and other transformations, along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.`;
 
 function Lightbox({ src, alt, onClose }) {
   useEffect(() => {
@@ -388,14 +388,14 @@ export default function LandingPage() {
               src="/figures/data_generation_process.png"
               alt="Data generation process: Humans solve ARC tasks, generating task-solving trajectories that are logged into the ARCTraj dataset"
               title="Data Generation Pipeline"
-              description="Humans solve ARC tasks through an interactive interface, generating object-oriented action trajectories logged as structured step sequences — resulting in 10,000+ annotated human trajectories."
+              description="Humans solve ARC tasks through an interactive interface, generating object-level action trajectories logged as structured step sequences. The dataset contains over 10,000 annotated human trajectories."
               onImageClick={openLightbox}
             />
             <FigureCard
               src="/figures/arctraj_actionsequence_vertical.png"
               alt="ARCTraj action sequence structure showing logId, userId, taskId, and detailed operation steps"
               title="Action Sequence Structure"
-              description="Each trajectory records the complete sequence of grid states, selected objects, operation types, and categories — capturing how humans incrementally build solutions through selection, coloring, and submission."
+              description="Each trajectory records the complete sequence of grid states, selected objects, operation types, and categories, capturing how humans incrementally build solutions through selection, coloring, and submission."
               onImageClick={openLightbox}
             />
           </div>
@@ -406,7 +406,7 @@ export default function LandingPage() {
                 Dataset Summary
               </h3>
               <p className="text-gray-400 text-sm leading-relaxed">
-                ARCTraj provides large-scale, object-centric trajectory data — in contrast to existing datasets like H-ARC that only capture low-level pixel edits without structured abstraction.
+                ARCTraj provides large-scale, object-centric trajectory data, in contrast to existing datasets like <a href="https://arc-visualizations.github.io/" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">H-ARC</a> that only capture low-level pixel edits without structured abstraction.
               </p>
             </div>
             <div className="p-5">
@@ -476,7 +476,7 @@ export default function LandingPage() {
             src="/figures/analysis_with_trajectory.png"
             alt="Analysis pipeline: extracting selection biases, color origins, and shared intentions from ARCTraj dataset"
             title="Overview"
-            description="From the ARCTraj dataset, we extract three categories of benchmarking analyses — selection biases revealing where humans focus, color origins uncovering hidden patterns in color usage, and shared intentions identifying common problem-solving strategies across participants."
+            description="From ARCTraj, we conduct three benchmarking analyses: selection biases in spatial focus, color origins in color usage patterns, and shared intentions in common problem-solving strategies across participants."
             onImageClick={openLightbox}
           />
           <div
@@ -487,7 +487,7 @@ export default function LandingPage() {
               src="/figures/heatmap_selection_size_distribution.png"
               alt="Heatmap of selection size distribution showing width vs height patterns"
               title="Selection Biases"
-              description="Humans predominantly select small, compact regions — suggesting object-level rather than pixel-level reasoning."
+              description="Humans predominantly select small, compact regions, suggesting object-level rather than pixel-level reasoning."
               onImageClick={openLightbox}
             >
               <img
@@ -551,7 +551,7 @@ export default function LandingPage() {
               src="/figures/uniqueness_analysis.png"
               alt="Unique trajectory ratio distribution and example trajectory showing shared intentionality"
               title="Shared Intentions"
-              description="Many tasks show convergent solving strategies, indicating common reasoning pathways across participants."
+              description={<>Many tasks show convergent solving strategies, indicating common reasoning pathways across participants. Leveraging this shared intentionality as auxiliary supervision has been shown to <a href="https://dl.acm.org/doi/10.1145/3711896.3736831" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">improve task-solving performance</a>.</>}
               onImageClick={openLightbox}
             />
           </div>
@@ -619,7 +619,7 @@ export default function LandingPage() {
               {
                 step: "2",
                 title: "Choose a Log",
-                description: "Each log represents one human attempt at solving the task, sorted by score in descending order. The score (0\u2013100,000) is determined by O2ARC 3.0 — faster submissions with fewer actions score higher, while incorrect answers receive 0.",
+                description: "Each log represents one human attempt at solving the task, sorted by score in descending order. The score (0\u2013100,000) is determined by O2ARC 3.0: faster submissions with fewer actions score higher, while incorrect answers receive 0. Selecting a log displays the task description (demo pairs and test input grid), which can be toggled on or off.",
               },
               {
                 step: "3",
