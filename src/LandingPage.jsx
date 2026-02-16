@@ -239,7 +239,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-proximity scroll-smooth bg-[#0E0E0E] text-white">
+    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-proximity md:snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
 
       {/* Fixed bottom nav */}
