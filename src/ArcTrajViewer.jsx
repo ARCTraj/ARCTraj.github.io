@@ -397,7 +397,7 @@ export default function ArcTrajViewer() {
         <div ref={viewerRef} className="flex-grow pt-3 pb-6 px-6 flex flex-col items-start overflow-hidden">
           {/* ARC Task info */}
           {selectedTaskId && arcTask && (
-            <div className="w-full mb-3 shrink-0 h-[170px]">
+            <div className="w-full mb-1 shrink-0 h-[170px]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm font-semibold text-gray-300 tracking-wider">Task: {selectedTaskId}</span>
                 <button
@@ -466,7 +466,7 @@ export default function ArcTrajViewer() {
             <div className="w-full flex-grow flex flex-col min-h-0">
               {selectedTask && selectedLogId && (
                 <>
-                <div className="mb-2 shrink-0">
+                <div className="mb-1 shrink-0">
                   <div className="relative inline-block md:hidden">
                     <select
                       value={selectedLogId}
@@ -500,7 +500,7 @@ export default function ArcTrajViewer() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-2 text-center shrink-0 font-mono">
+                <p className="text-sm text-gray-400 mb-1 text-center shrink-0 font-mono">
                   Step{' '}
                   <span className="text-white font-medium inline-block w-[1.25ch] text-right">{step}</span>
                   /
