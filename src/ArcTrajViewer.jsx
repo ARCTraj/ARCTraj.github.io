@@ -440,7 +440,7 @@ export default function ArcTrajViewer() {
               >
                 {selectedTask.logs.map(log => (
                   <option key={log.logId} value={log.logId}>
-                    #{log.logId}{log.score === 0 ? " (failed)" : ""}
+                    log #{log.logId}{log.score === 0 ? " (failed)" : ""}
                   </option>
                 ))}
               </select>
