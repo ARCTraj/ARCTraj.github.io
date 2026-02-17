@@ -170,7 +170,6 @@ export default function ArcTrajViewer() {
 
   useEffect(() => {
     if (!selectedTaskId) { setArcTask(null); return; }
-    setArcTask(null);
     fetch(`${ARC_BASE_URL}/${selectedTaskId}.json`)
       .then(res => res.ok ? res.json() : null)
       .then(data => setArcTask(data))
