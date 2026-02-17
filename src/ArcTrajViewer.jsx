@@ -51,11 +51,11 @@ const colorMap = {
 
 const ARC_BASE_URL = "https://raw.githubusercontent.com/fchollet/ARC-AGI/master/data/training";
 
-function MiniGrid({ grid, maxSize = 80 }) {
+function MiniGrid({ grid, maxSize = 80, cellSize: forcedCellSize }) {
   if (!grid || !grid.length) return null;
   const rows = grid.length;
   const cols = grid[0].length;
-  const cell = Math.max(Math.floor(Math.min(maxSize / cols, maxSize / rows)), 2);
+  const cell = forcedCellSize || Math.max(Math.floor(Math.min(maxSize / cols, maxSize / rows)), 2);
   return (
     <div
       className="grid shrink-0"
@@ -411,6 +411,18 @@ export default function ArcTrajViewer() {
                   </svg>
                 </button>
               </div>
+              {(() => {
+                const allGrids = [
+                  ...arcTask.train.flatMap(p => [p.input, p.output]),
+                  arcTask.test[0].input
+                ];
+                const maxRows = Math.max(...allGrids.map(g => g.length));
+                const maxCols = Math.max(...allGrids.map(g => g[0].length));
+                const uniCell = Math.max(Math.floor(Math.min(80 / maxCols, 80 / maxRows)), 2);
+                const testInput = arcTask.test[0].input;
+                const answerW = testInput[0].length * uniCell + (testInput[0].length - 1);
+                const answerH = testInput.length * uniCell + (testInput.length - 1);
+                return (
               <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1 overflow-x-auto">
                 <div className="flex items-start gap-5 w-max">
                   {arcTask.train.map((pair, i) => (
@@ -419,14 +431,14 @@ export default function ArcTrajViewer() {
                       <div className="flex items-start gap-2">
                         <div className="text-center">
                           <p className="text-[10px] text-gray-500 mb-1">In {i + 1}</p>
-                          <MiniGrid grid={pair.input} />
+                          <MiniGrid grid={pair.input} cellSize={uniCell} />
                         </div>
                         <svg className="w-3 h-3 text-gray-500 shrink-0 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                         <div className="text-center">
                           <p className="text-[10px] text-gray-500 mb-1">Out {i + 1}</p>
-                          <MiniGrid grid={pair.output} />
+                          <MiniGrid grid={pair.output} cellSize={uniCell} />
                         </div>
                       </div>
                     </React.Fragment>
@@ -435,18 +447,20 @@ export default function ArcTrajViewer() {
                   <div className="flex items-start gap-2">
                     <div className="text-center">
                       <p className="text-[10px] text-[#5A9485] mb-1 font-medium">Test</p>
-                      <MiniGrid grid={arcTask.test[0].input} />
+                      <MiniGrid grid={arcTask.test[0].input} cellSize={uniCell} />
                     </div>
                     <svg className="w-3 h-3 text-gray-500 shrink-0 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                     <div className="text-center">
                       <p className="text-[10px] text-gray-500 mb-1">Answer</p>
-                      <div className="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs">?</div>
+                      <div className="border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs" style={{ width: answerW, height: answerH }}>?</div>
                     </div>
                   </div>
                 </div>
               </div>
+                );
+              })()}
             </div>
           )}
           {selectedTask && selectedLogId && (
