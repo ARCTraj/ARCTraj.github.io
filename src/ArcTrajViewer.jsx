@@ -464,7 +464,7 @@ export default function ArcTrajViewer() {
                   </svg>
                 </button>
                 <p className="text-sm text-gray-400 w-48 truncate">
-                  Step <span className="text-white font-medium">{step + 1}/{trajectory.length}</span>
+                  Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
                   <span className="mx-2 text-[#333]">|</span>
                   <span className="text-gray-300">{currentState.action}</span>
                 </p>
