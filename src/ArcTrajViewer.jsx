@@ -519,28 +519,30 @@ export default function ArcTrajViewer() {
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                   </svg>
                 </button>
-                <div
-                  className="grid"
-                  style={{
-                    gridTemplateColumns: `repeat(${currentState.grid[0].length}, ${cellSize}px)`,
-                    gap: "2px"
-                  }}
-                >
-                  {currentState.grid.map((row, y) =>
-                    row.map((val, x) => {
-                      const objectHere = currentState.objects.find(o => o.x === x && o.y === y);
-                      const isSelected = objectHere !== undefined;
-                      const colorClass = colorMap[objectHere ? objectHere.color : val] || "bg-gray-300";
-                      const extraClass = isSelected ? "ring-2 ring-[#5A9485]" : "";
-                      return (
-                        <div
-                          key={`${x}-${y}`}
-                          className={`${colorClass} ${extraClass}`}
-                          style={{ width: cellSize, height: cellSize }}
-                        />
-                      );
-                    })
-                  )}
+                <div className="flex-grow flex justify-center">
+                  <div
+                    className="grid"
+                    style={{
+                      gridTemplateColumns: `repeat(${currentState.grid[0].length}, ${cellSize}px)`,
+                      gap: "2px"
+                    }}
+                  >
+                    {currentState.grid.map((row, y) =>
+                      row.map((val, x) => {
+                        const objectHere = currentState.objects.find(o => o.x === x && o.y === y);
+                        const isSelected = objectHere !== undefined;
+                        const colorClass = colorMap[objectHere ? objectHere.color : val] || "bg-gray-300";
+                        const extraClass = isSelected ? "ring-2 ring-[#5A9485]" : "";
+                        return (
+                          <div
+                            key={`${x}-${y}`}
+                            className={`${colorClass} ${extraClass}`}
+                            style={{ width: cellSize, height: cellSize }}
+                          />
+                        );
+                      })
+                    )}
+                  </div>
                 </div>
                 <button
                   onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
