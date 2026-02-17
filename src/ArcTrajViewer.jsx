@@ -553,30 +553,28 @@ export default function ArcTrajViewer() {
                   </svg>
                 </button>
               </div>
-              {step === trajectory.length - 1 && trajectory.length > 1 && (
-                <div className="flex flex-col items-center gap-3 mt-4 shrink-0">
-                  <button
-                    onClick={() => selectRandomLog(tasks)}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
-                    </svg>
-                    Try Another Task
-                  </button>
-                  <button
-                    onClick={() => setSidebarOpen(true)}
-                    className="md:hidden inline-flex items-center gap-1.5 text-xs hover:text-white transition-colors"
-                  >
-                    <span className="text-gray-500">or</span>
-                    <svg className="w-3.5 h-3.5 text-[#5A9485]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M3 12h18M3 6h18M3 18h18" />
-                    </svg>
-                    <span className="text-[#5A9485]">browse</span>
-                    <span className="text-gray-500">all 400 tasks</span>
-                  </button>
-                </div>
-              )}
+              <div className={`flex flex-col items-center gap-3 mt-4 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
+                <button
+                  onClick={() => selectRandomLog(tasks)}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+                  </svg>
+                  Try Another Task
+                </button>
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="md:hidden inline-flex items-center gap-1.5 text-xs hover:text-white transition-colors"
+                >
+                  <span className="text-gray-500">or</span>
+                  <svg className="w-3.5 h-3.5 text-[#5A9485]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M3 12h18M3 6h18M3 18h18" />
+                  </svg>
+                  <span className="text-[#5A9485]">browse</span>
+                  <span className="text-gray-500">all 400 tasks</span>
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex-grow flex flex-col items-center justify-center w-full gap-3">
