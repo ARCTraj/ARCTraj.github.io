@@ -465,7 +465,7 @@ export default function ArcTrajViewer() {
             </div>
           )}
           {currentState ? (
-            <div>
+            <div className="w-full">
               {selectedTask && selectedLogId && (
                 <>
                 <div className="mb-2">
