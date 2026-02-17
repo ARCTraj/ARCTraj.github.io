@@ -396,7 +396,7 @@ export default function ArcTrajViewer() {
                 </button>
               </div>
               {showTask && (
-                <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1">
+                <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1 max-h-32 md:max-h-none overflow-y-auto">
                   <div className="flex flex-wrap gap-4">
                     {arcTask.train.map((pair, i) => (
                       <div key={i} className="flex items-center gap-2">
