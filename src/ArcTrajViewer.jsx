@@ -83,6 +83,7 @@ export default function ArcTrajViewer() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const viewerRef = useRef(null);
   const gridRowRef = useRef(null);
+  const ctaRef = useRef(null);
   const [cellSize, setCellSize] = useState(40);
   const [arcTask, setArcTask] = useState(null);
 
@@ -199,9 +200,11 @@ export default function ArcTrajViewer() {
     // Calculate available height from grid row top to viewer bottom, minus CTA reserve
     const viewerRect = viewerRef.current.getBoundingClientRect();
     const rowRect = rowEl.getBoundingClientRect();
-    // CTA: mt-3(12) + button(36) + gap-3(12) + browse(16) = 76, plus viewer pb-6(24) = 100, +10 safety
-    const ctaReserved = 110;
-    const availH = viewerRect.bottom - rowRect.top - ctaReserved - (rows - 1) * gap;
+    // Measure actual CTA height + its margin, plus viewer bottom padding (pb-6 = 24px)
+    const ctaEl = ctaRef.current;
+    const ctaH = ctaEl ? ctaEl.offsetHeight + 12 : 0; // 12 = mt-3
+    const bottomPad = 24; // pb-6
+    const availH = viewerRect.bottom - rowRect.top - ctaH - bottomPad - (rows - 1) * gap;
     const size = Math.floor(Math.min(availW / cols, availH / rows, 40) * 0.8);
     setCellSize(Math.max(size, 4));
   }, [currentState]);
@@ -251,7 +254,7 @@ export default function ArcTrajViewer() {
   }, [updateCellSize]);
 
   return (
-    <div className="flex flex-col h-screen w-full overflow-hidden bg-[#0E0E0E] text-white">
+    <div className="flex flex-col h-[100dvh] w-full overflow-hidden bg-[#0E0E0E] text-white">
       {/* 상단 헤더 */}
       <div className="border-b border-[#212121] py-1.5 px-4 md:px-6 flex items-center gap-2 md:gap-4">
         <Link
@@ -557,7 +560,7 @@ export default function ArcTrajViewer() {
                   </svg>
                 </button>
               </div>
-              <div className={`flex flex-col items-center gap-3 mt-3 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
+              <div ref={ctaRef} className={`flex flex-col items-center gap-3 mt-3 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
                 <button
                   onClick={() => selectRandomLog(tasks)}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
