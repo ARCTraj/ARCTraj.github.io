@@ -248,7 +248,7 @@ export default function ArcTrajViewer() {
   return (
     <div className="flex flex-col h-screen w-full overflow-hidden bg-[#0E0E0E] text-white">
       {/* 상단 헤더 */}
-      <div className="border-b border-[#212121] py-3 px-4 md:px-6 flex items-center gap-2 md:gap-4">
+      <div className="border-b border-[#212121] py-1.5 px-4 md:px-6 flex items-center gap-2 md:gap-4">
         <Link
           to="/"
           className="text-gray-400 hover:text-[#5A9485] transition-colors text-sm flex items-center gap-1.5 shrink-0"
