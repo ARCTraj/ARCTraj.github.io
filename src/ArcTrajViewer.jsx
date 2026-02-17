@@ -164,7 +164,7 @@ export default function ArcTrajViewer() {
   const trajectory = useMemo(() => {
     const traj = selectedLog?.trajectory || [];
     if (arcTask && traj.length > 0) {
-      const initial = { time: -1, grid: arcTask.test[0].input, objects: [], action: "initial" };
+      const initial = { time: -1, grid: arcTask.test[0].input, objects: [], action: "Initial" };
       return [initial, ...traj];
     }
     return traj;
@@ -423,7 +423,7 @@ export default function ArcTrajViewer() {
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                     <div className="text-center">
-                      <p className="text-[10px] text-gray-500 mb-1">?</p>
+                      <p className="text-[10px] text-gray-500 mb-1">Answer</p>
                       <div className="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs">?</div>
                     </div>
                   </div>
