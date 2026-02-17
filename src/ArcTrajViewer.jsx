@@ -394,7 +394,7 @@ export default function ArcTrajViewer() {
         </div>
 
         {/* 오른쪽 Trajectory Viewer */}
-        <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-hidden">
+        <div ref={viewerRef} className="flex-grow pt-3 pb-6 px-6 flex flex-col items-start overflow-hidden">
           {/* ARC Task info */}
           {selectedTaskId && arcTask && (
             <div className="w-full mb-3 shrink-0 h-[170px]">
