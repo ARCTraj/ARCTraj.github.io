@@ -108,7 +108,7 @@ export default function ArcTrajViewer() {
               time: idx,
               grid: entry.grid,
               objects: entry.object || [],
-              action: `${entry.operation} (${entry.position?.x ?? ""},${entry.position?.y ?? ""})`
+              action: entry.operation
             }));
           } catch {
             continue;
@@ -431,11 +431,31 @@ export default function ArcTrajViewer() {
           )}
           {currentState ? (
             <div>
-              <p className="mb-3 text-sm text-gray-400">
-                Step <span className="text-white font-medium">{step}</span>
-                <span className="mx-2 text-[#333]">|</span>
-                <span className="text-gray-300">{currentState.action}</span>
-              </p>
+              <div className="flex items-center gap-3 mb-3">
+                <button
+                  onClick={() => setStep(prev => Math.max(prev - 1, 0))}
+                  disabled={step === 0}
+                  className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <p className="text-sm text-gray-400">
+                  Step <span className="text-white font-medium">{step + 1}/{trajectory.length}</span>
+                  <span className="mx-2 text-[#333]">|</span>
+                  <span className="text-gray-300">{currentState.action}</span>
+                </p>
+                <button
+                  onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
+                  disabled={step === trajectory.length - 1}
+                  className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
+              </div>
               <div
                 className="grid"
                 style={{
@@ -458,30 +478,6 @@ export default function ArcTrajViewer() {
                     );
                   })
                 )}
-              </div>
-              {/* Step navigation buttons */}
-              <div className="flex items-center gap-4 mt-4">
-                <button
-                  onClick={() => setStep(prev => Math.max(prev - 1, 0))}
-                  disabled={step === 0}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                  </svg>
-                  Prev
-                </button>
-                <span className="text-xs text-gray-500">{step + 1} / {trajectory.length}</span>
-                <button
-                  onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
-                  disabled={step === trajectory.length - 1}
-                  className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
-                >
-                  Next
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M5 12h14M12 5l7 7-7 7" />
-                  </svg>
-                </button>
               </div>
             </div>
           ) : (
