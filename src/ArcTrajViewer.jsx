@@ -505,8 +505,7 @@ export default function ArcTrajViewer() {
                   <span className="text-white font-medium inline-block w-[1.25ch] text-right">{step}</span>
                   /
                   <span className="text-white font-medium inline-block w-[1.25ch] text-left">{trajectory.length - 1}</span>
-                  <span className="mx-2 text-[#333]">|</span>
-                  <span className="text-gray-300 inline-block w-[13ch] text-center">{currentState.action}</span>
+                  <span className="text-gray-300 inline-block w-[13ch] text-center ml-3">{currentState.action}</span>
                 </p>
                 </>
               )}
