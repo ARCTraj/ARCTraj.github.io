@@ -189,14 +189,18 @@ export default function ArcTrajViewer() {
   const currentState = trajectory[step];
 
   const updateCellSize = useCallback(() => {
-    if (!currentState || !gridRowRef.current) return;
-    const rowEl = gridRowRef.current;
+    if (!currentState || !gridRowRef.current || !viewerRef.current) return;
     const cols = currentState.grid[0].length;
     const rows = currentState.grid.length;
     const gap = 2;
-    const navButtons = 80;
+    const navButtons = 96;
+    const rowEl = gridRowRef.current;
     const availW = rowEl.clientWidth - navButtons - (cols - 1) * gap;
-    const availH = rowEl.clientHeight - (rows - 1) * gap;
+    // Calculate available height from grid row top to viewer bottom, minus CTA reserve
+    const viewerRect = viewerRef.current.getBoundingClientRect();
+    const rowRect = rowEl.getBoundingClientRect();
+    const ctaReserved = 80;
+    const availH = viewerRect.bottom - rowRect.top - ctaReserved - (rows - 1) * gap;
     const size = Math.floor(Math.min(availW / cols, availH / rows, 40) * 0.8);
     setCellSize(Math.max(size, 4));
   }, [currentState]);
@@ -465,7 +469,6 @@ export default function ArcTrajViewer() {
           {currentState ? (
             <div className="w-full flex-grow flex flex-col min-h-0">
               {selectedTask && selectedLogId && (
-                <>
                 <div className="mt-5 mb-2 shrink-0">
                   <div className="relative inline-block md:hidden">
                     <select
@@ -500,22 +503,21 @@ export default function ArcTrajViewer() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-0 text-center shrink-0 font-mono">
-                  Step{' '}
-                  <span className="text-white font-medium inline-block w-[1.25ch] text-right">{step}</span>
-                  /
-                  <span className="text-white font-medium inline-block w-[1.25ch] text-left">{trajectory.length - 1}</span>
-                  <span className="text-gray-300 inline-block w-[13ch] text-center ml-3">{currentState.action}</span>
-                </p>
-                </>
               )}
-              <div ref={gridRowRef} className="flex items-center justify-between w-full flex-grow min-h-0">
+              <p className="text-sm text-gray-400 mt-4 mb-2 text-center shrink-0 font-mono">
+                Step{' '}
+                <span className="text-white font-medium inline-block w-[2ch] text-right">{step}</span>
+                /
+                <span className="text-white font-medium inline-block w-[2ch] text-left">{trajectory.length - 1}</span>
+                <span className="text-gray-300 inline-block w-[13ch] text-center ml-3">{currentState.action}</span>
+              </p>
+              <div ref={gridRowRef} className="flex-grow flex items-center justify-between w-full">
                 <button
                   onClick={() => setStep(prev => Math.max(prev - 1, 0))}
                   disabled={step === 0}
-                  className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333] shrink-0"
+                  className="p-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333] shrink-0"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M19 12H5M12 19l-7-7 7-7" />
                   </svg>
                 </button>
@@ -547,14 +549,14 @@ export default function ArcTrajViewer() {
                 <button
                   onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
                   disabled={step === trajectory.length - 1}
-                  className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333] shrink-0"
+                  className="p-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333] shrink-0"
                 >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-5 h-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M5 12h14M12 5l7 7-7 7" />
                   </svg>
                 </button>
               </div>
-              <div className={`flex flex-col items-center gap-3 mt-2 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
+              <div className={`flex flex-col items-center gap-3 mt-3 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
                 <button
                   onClick={() => selectRandomLog(tasks)}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
