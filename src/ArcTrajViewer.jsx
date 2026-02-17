@@ -199,7 +199,8 @@ export default function ArcTrajViewer() {
     // Calculate available height from grid row top to viewer bottom, minus CTA reserve
     const viewerRect = viewerRef.current.getBoundingClientRect();
     const rowRect = rowEl.getBoundingClientRect();
-    const ctaReserved = 80;
+    // CTA: mt-3(12) + button(36) + gap-3(12) + browse(16) = 76, plus viewer pb-6(24) = 100, +10 safety
+    const ctaReserved = 110;
     const availH = viewerRect.bottom - rowRect.top - ctaReserved - (rows - 1) * gap;
     const size = Math.floor(Math.min(availW / cols, availH / rows, 40) * 0.8);
     setCellSize(Math.max(size, 4));
