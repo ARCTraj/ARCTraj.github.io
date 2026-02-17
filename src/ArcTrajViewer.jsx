@@ -197,7 +197,7 @@ export default function ArcTrajViewer() {
     const navButtons = 80;
     const availW = rowEl.clientWidth - navButtons - (cols - 1) * gap;
     const availH = rowEl.clientHeight - (rows - 1) * gap;
-    const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
+    const size = Math.floor(Math.min(availW / cols, availH / rows, 40) * 0.9);
     setCellSize(Math.max(size, 4));
   }, [currentState]);
 
