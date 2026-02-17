@@ -151,6 +151,23 @@ export default function ArcTrajViewer() {
   }, []);
 
   useEffect(() => {
+    if (sidebarOpen || !selectedTaskId || selectedLogId) return;
+    const task = tasks.find(t => t.id === selectedTaskId);
+    if (!task || task.logs.length === 0) return;
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const logs = task.logs;
+    const ideal = logs.filter(l => l.score >= 85000 && l.score <= 93000);
+    const wider = logs.filter(l => l.score >= 85000 && l.score < 98000);
+    const safe = logs.filter(l => l.score > 0 && l.score < 98000);
+    const candidates = ideal.length > 0 ? ideal : wider.length > 0 ? wider : safe.length > 0 ? safe : logs;
+    const chosen = pick(candidates);
+    if (chosen) {
+      setSelectedLogId(chosen.logId);
+      setStep(0);
+    }
+  }, [sidebarOpen, selectedTaskId, selectedLogId, tasks]);
+
+  useEffect(() => {
     if (!selectedTaskId) { setArcTask(null); return; }
     setArcTask(null);
     fetch(`${ARC_BASE_URL}/${selectedTaskId}.json`)
