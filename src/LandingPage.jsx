@@ -607,24 +607,24 @@ export default function LandingPage() {
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Interactive Demo</SectionTitle>
           <p className="text-gray-300 leading-relaxed text-base mb-8">
-            Explore real human problem-solving trajectories from ARCTraj directly in your browser.
+            Explore real human problem-solving trajectories from ARCTraj directly in your browser. A random trajectory loads automatically on entry.
           </p>
           <div className="space-y-4">
             {[
               {
                 step: "1",
-                title: "Select a Task",
-                description: "After the dataset finishes loading, the left panel lists all 400 ARC tasks. Click a task ID to expand its log list.",
+                title: "Navigate Steps",
+                description: "Use the left/right arrow keys (or swipe on mobile) to step through the trajectory. Each step shows the current grid state, the operation, and highlights the selected region.",
               },
               {
                 step: "2",
-                title: "Choose a Log",
-                description: "Each log represents one human attempt at solving the task, sorted by score in descending order. The score (0\u2013100,000) is determined by O2ARC 3.0: faster submissions with fewer actions score higher, while incorrect answers receive 0. Selecting a log displays the task description (demo pairs and test input grid), which can be toggled on or off.",
+                title: "Switch Logs",
+                description: "Use the log dropdown to switch between different human attempts for the same task. Scores (0\u2013100,000) are determined by O2ARC 3.0: faster submissions with fewer actions score higher, while incorrect answers receive 0.",
               },
               {
                 step: "3",
-                title: "Navigate Steps",
-                description: "Use the left/right arrow keys (or swipe on mobile) to step through the trajectory. Each step shows the current grid state, the next operation, and highlights the selected region.",
+                title: "Explore Tasks",
+                description: "Use the shuffle button to load a random task, or open the task list to browse all 400 ARC tasks with mini previews of demo pairs.",
               },
             ].map((item) => (
               <div
