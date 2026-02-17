@@ -400,13 +400,13 @@ export default function ArcTrajViewer() {
           {selectedTaskId && arcTask && (
             <div className="w-full mb-3">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xs text-gray-400">Task: {selectedTaskId}</span>
+                <span className="text-sm font-semibold text-gray-300 tracking-wider">Task: {selectedTaskId}</span>
                 <button
                   onClick={() => selectRandomLog(tasks)}
                   className="p-1 rounded text-gray-500 hover:text-white transition-colors"
                   title="Random Task"
                 >
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
                   </svg>
                 </button>
