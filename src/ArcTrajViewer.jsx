@@ -421,7 +421,7 @@ export default function ArcTrajViewer() {
                           <p className="text-[10px] text-gray-500 mb-1">In {i + 1}</p>
                           <MiniGrid grid={pair.input} />
                         </div>
-                        <svg className="w-3 h-3 text-gray-500 shrink-0 mt-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <svg className="w-3 h-3 text-gray-500 shrink-0 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                           <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                         <div className="text-center">
@@ -437,7 +437,7 @@ export default function ArcTrajViewer() {
                       <p className="text-[10px] text-[#5A9485] mb-1 font-medium">Test</p>
                       <MiniGrid grid={arcTask.test[0].input} />
                     </div>
-                    <svg className="w-3 h-3 text-gray-500 shrink-0 mt-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <svg className="w-3 h-3 text-gray-500 shrink-0 self-center" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                       <path d="M5 12h14M12 5l7 7-7 7" />
                     </svg>
                     <div className="text-center">
