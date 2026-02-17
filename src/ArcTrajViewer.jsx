@@ -509,7 +509,7 @@ export default function ArcTrajViewer() {
                 )}
               </div>
               {step === trajectory.length - 1 && trajectory.length > 1 && (
-                <div className="flex flex-col items-start gap-4 mt-4">
+                <div className="flex flex-col items-start gap-3 mt-4">
                   <button
                     onClick={() => selectRandomLog(tasks)}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
