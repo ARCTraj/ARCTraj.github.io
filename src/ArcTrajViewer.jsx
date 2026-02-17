@@ -172,7 +172,7 @@ export default function ArcTrajViewer() {
     const rows = currentState.grid.length;
     const gap = 2;
     const padding = 48;
-    const reservedHeight = 120;
+    const reservedHeight = 280;
     const availW = el.clientWidth - padding - (cols - 1) * gap;
     const availH = el.clientHeight - reservedHeight - (rows - 1) * gap;
     const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
@@ -396,7 +396,7 @@ export default function ArcTrajViewer() {
                 </button>
               </div>
               {showTask && (
-                <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1 max-h-32 md:max-h-none overflow-y-auto">
+                <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1 max-h-24 md:max-h-none overflow-y-auto">
                   <div className="flex flex-wrap gap-4">
                     {arcTask.train.map((pair, i) => (
                       <div key={i} className="flex items-center gap-2">
