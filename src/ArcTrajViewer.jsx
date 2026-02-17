@@ -132,12 +132,16 @@ export default function ArcTrajViewer() {
         setLoading(false);
 
         // Auto-select a random task/log on first load
-        const tasksWithLogs = taskList.filter(t => t.logs.length > 0);
-        if (tasksWithLogs.length > 0) {
-          const randomTask = tasksWithLogs[Math.floor(Math.random() * tasksWithLogs.length)];
-          const randomLog = randomTask.logs[Math.floor(Math.random() * randomTask.logs.length)];
-          setSelectedTaskId(randomTask.id);
-          setSelectedLogId(randomLog.logId);
+        const allLogs = taskList.flatMap(t => t.logs.map(l => ({ taskId: t.id, ...l })));
+        const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+        const ideal = allLogs.filter(l => l.score >= 85000 && l.score <= 93000);
+        const wider = allLogs.filter(l => l.score >= 85000 && l.score < 98000);
+        const safe = allLogs.filter(l => l.score > 0 && l.score < 98000);
+        const candidates = ideal.length > 0 ? ideal : wider.length > 0 ? wider : safe.length > 0 ? safe : allLogs;
+        const chosen = pick(candidates);
+        if (chosen) {
+          setSelectedTaskId(chosen.taskId);
+          setSelectedLogId(chosen.logId);
           setStep(0);
         }
       });
