@@ -130,6 +130,16 @@ export default function ArcTrajViewer() {
 
         setTasks(taskList);
         setLoading(false);
+
+        // Auto-select a random task/log on first load
+        const tasksWithLogs = taskList.filter(t => t.logs.length > 0);
+        if (tasksWithLogs.length > 0) {
+          const randomTask = tasksWithLogs[Math.floor(Math.random() * tasksWithLogs.length)];
+          const randomLog = randomTask.logs[Math.floor(Math.random() * randomTask.logs.length)];
+          setSelectedTaskId(randomTask.id);
+          setSelectedLogId(randomLog.logId);
+          setStep(0);
+        }
       });
   }, []);
 
@@ -481,8 +491,10 @@ export default function ArcTrajViewer() {
                   <p className="text-gray-500 text-sm">Loading tasks...</p>
                 </>
               ) : (
-                <p className="text-gray-500 text-sm">Select a task and log to view the trajectory.</p>
+                <p className="text-gray-500 text-sm">Select a task and log from the sidebar.</p>
               )}
+              {/* Previous empty state UI (preserved for rollback):
+              <p className="text-gray-500 text-sm">Select a task and log to view the trajectory.</p>
               <button
                 onClick={() => setSidebarOpen(true)}
                 className={`md:hidden inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-sm text-gray-300 hover:border-[#5A9485] transition-colors ${loading ? "hidden" : ""}`}
@@ -492,6 +504,7 @@ export default function ArcTrajViewer() {
                 </svg>
                 Open Task List
               </button>
+              */}
             </div>
           )}
         </div>
