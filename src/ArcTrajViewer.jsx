@@ -397,7 +397,7 @@ export default function ArcTrajViewer() {
         <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-hidden">
           {/* ARC Task info */}
           {selectedTaskId && arcTask && (
-            <div className="w-full mb-3 shrink-0 h-[185px]">
+            <div className="w-full mb-3 shrink-0 h-[170px]">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm font-semibold text-gray-300 tracking-wider">Task: {selectedTaskId}</span>
                 <button
