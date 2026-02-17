@@ -82,6 +82,7 @@ export default function ArcTrajViewer() {
   const [loading, setLoading] = useState(true);
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const viewerRef = useRef(null);
+  const gridRowRef = useRef(null);
   const [cellSize, setCellSize] = useState(40);
   const [arcTask, setArcTask] = useState(null);
 
@@ -189,16 +190,14 @@ export default function ArcTrajViewer() {
   const currentState = trajectory[step];
 
   const updateCellSize = useCallback(() => {
-    if (!currentState || !viewerRef.current) return;
-    const el = viewerRef.current;
+    if (!currentState || !gridRowRef.current) return;
+    const rowEl = gridRowRef.current;
     const cols = currentState.grid[0].length;
     const rows = currentState.grid.length;
     const gap = 2;
-    const padding = 48;
     const navButtons = 80;
-    const reservedHeight = 440;
-    const availW = el.clientWidth - padding - navButtons - (cols - 1) * gap;
-    const availH = el.clientHeight - reservedHeight - (rows - 1) * gap;
+    const availW = rowEl.clientWidth - navButtons - (cols - 1) * gap;
+    const availH = rowEl.clientHeight - (rows - 1) * gap;
     const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
     setCellSize(Math.max(size, 4));
   }, [currentState]);
@@ -396,10 +395,10 @@ export default function ArcTrajViewer() {
         </div>
 
         {/* 오른쪽 Trajectory Viewer */}
-        <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-auto">
+        <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-hidden">
           {/* ARC Task info */}
           {selectedTaskId && arcTask && (
-            <div className="w-full mb-3">
+            <div className="w-full mb-3 shrink-0">
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm font-semibold text-gray-300 tracking-wider">Task: {selectedTaskId}</span>
                 <button
@@ -465,10 +464,10 @@ export default function ArcTrajViewer() {
             </div>
           )}
           {currentState ? (
-            <div className="w-full">
+            <div className="w-full flex-grow flex flex-col min-h-0">
               {selectedTask && selectedLogId && (
                 <>
-                <div className="mb-2">
+                <div className="mb-2 shrink-0">
                   <div className="relative inline-block md:hidden">
                     <select
                       value={selectedLogId}
@@ -502,14 +501,14 @@ export default function ArcTrajViewer() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-2 text-center">
+                <p className="text-sm text-gray-400 mb-2 text-center shrink-0">
                   Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
                   <span className="mx-2 text-[#333]">|</span>
                   <span className="text-gray-300">{currentState.action}</span>
                 </p>
                 </>
               )}
-              <div className="flex items-center justify-between w-full">
+              <div ref={gridRowRef} className="flex items-center justify-between w-full flex-grow min-h-0">
                 <button
                   onClick={() => setStep(prev => Math.max(prev - 1, 0))}
                   disabled={step === 0}
@@ -555,7 +554,7 @@ export default function ArcTrajViewer() {
                 </button>
               </div>
               {step === trajectory.length - 1 && trajectory.length > 1 && (
-                <div className="flex flex-col items-center gap-3 mt-4">
+                <div className="flex flex-col items-center gap-3 mt-4 shrink-0">
                   <button
                     onClick={() => selectRandomLog(tasks)}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
