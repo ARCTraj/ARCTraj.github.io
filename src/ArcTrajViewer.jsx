@@ -308,7 +308,9 @@ export default function ArcTrajViewer() {
           {!loading && (
             <ul className="px-2 py-2 space-y-0.5">
               {tasks.map((task) => (
-                <li key={task.id} className="flex flex-col">
+                <li key={task.id} className="flex flex-col"
+                  ref={selectedTaskId === task.id ? (el) => el?.scrollIntoView({ block: "nearest" }) : undefined}
+                >
                   <div
                     className={`cursor-pointer px-3 py-1.5 rounded-lg text-sm font-mono transition-colors ${
                       selectedTaskId === task.id
