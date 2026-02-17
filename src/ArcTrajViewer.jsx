@@ -373,15 +373,26 @@ export default function ArcTrajViewer() {
           {/* ARC Task toggle */}
           {selectedTaskId && arcTask && (
             <div className="w-full mb-3">
-              <button
-                onClick={() => setShowTask(!showTask)}
-                className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors mb-2"
-              >
-                <svg className={`w-3 h-3 transition-transform ${showTask ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5l8 7-8 7z" />
-                </svg>
-                Task: {selectedTaskId}
-              </button>
+              <div className="flex items-center gap-2 mb-2">
+                <button
+                  onClick={() => setShowTask(!showTask)}
+                  className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors"
+                >
+                  <svg className={`w-3 h-3 transition-transform ${showTask ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8 5l8 7-8 7z" />
+                  </svg>
+                  Task: {selectedTaskId}
+                </button>
+                <button
+                  onClick={() => selectRandomLog(tasks)}
+                  className="p-1 rounded text-gray-500 hover:text-white transition-colors"
+                  title="Random Task"
+                >
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+                  </svg>
+                </button>
+              </div>
               {showTask && (
                 <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1">
                   <div className="flex flex-wrap gap-4">
@@ -419,7 +430,7 @@ export default function ArcTrajViewer() {
             </div>
           )}
           {selectedTask && selectedLogId && (
-            <div className="w-full mb-3 flex items-center">
+            <div className="w-full mb-3">
               <select
                 value={selectedLogId}
                 onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
@@ -431,15 +442,6 @@ export default function ArcTrajViewer() {
                   </option>
                 ))}
               </select>
-              <button
-                onClick={() => selectRandomLog(tasks)}
-                className="ml-2 p-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-gray-400 hover:text-white hover:border-[#5A9485] transition-colors"
-                title="Random Task"
-              >
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
-                </svg>
-              </button>
             </div>
           )}
           {currentState ? (
