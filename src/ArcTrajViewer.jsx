@@ -500,10 +500,13 @@ export default function ArcTrajViewer() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-2 text-center shrink-0">
-                  Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
+                <p className="text-sm text-gray-400 mb-2 text-center shrink-0 font-mono">
+                  Step{' '}
+                  <span className="text-white font-medium inline-block w-[1.25ch] text-right">{step}</span>
+                  /
+                  <span className="text-white font-medium inline-block w-[1.25ch] text-left">{trajectory.length - 1}</span>
                   <span className="mx-2 text-[#333]">|</span>
-                  <span className="text-gray-300">{currentState.action}</span>
+                  <span className="text-gray-300 inline-block w-[13ch] text-center">{currentState.action}</span>
                 </p>
                 </>
               )}
