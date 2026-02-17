@@ -466,87 +466,91 @@ export default function ArcTrajViewer() {
           {currentState ? (
             <div>
               {selectedTask && selectedLogId && (
-                <div className="flex items-center gap-3 mb-3">
-                  <button
-                    onClick={() => setStep(prev => Math.max(prev - 1, 0))}
-                    disabled={step === 0}
-                    className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M19 12H5M12 19l-7-7 7-7" />
-                    </svg>
-                  </button>
-                  <div className="relative inline-block md:hidden">
-                    <select
-                      value={selectedLogId}
-                      onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
-                      className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
-                    >
-                      {selectedTask.logs.map(log => (
-                        <option key={log.logId} value={log.logId}>
-                          log #{log.logId}{log.score === 0 ? " (failed)" : ""}
-                        </option>
-                      ))}
-                    </select>
-                    <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M6 9l6 6 6-6" />
-                    </svg>
+                <>
+                  <div className="mb-2">
+                    <div className="relative inline-block md:hidden">
+                      <select
+                        value={selectedLogId}
+                        onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
+                        className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
+                      >
+                        {selectedTask.logs.map(log => (
+                          <option key={log.logId} value={log.logId}>
+                            log #{log.logId}{log.score === 0 ? " (failed)" : ""}
+                          </option>
+                        ))}
+                      </select>
+                      <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </div>
+                    <div className="relative hidden md:inline-block">
+                      <select
+                        value={selectedLogId}
+                        onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
+                        className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
+                      >
+                        {selectedTask.logs.map(log => (
+                          <option key={log.logId} value={log.logId}>
+                            log #{log.logId} (score: {log.score})
+                          </option>
+                        ))}
+                      </select>
+                      <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <path d="M6 9l6 6 6-6" />
+                      </svg>
+                    </div>
                   </div>
-                  <div className="relative hidden md:inline-block">
-                    <select
-                      value={selectedLogId}
-                      onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
-                      className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
-                    >
-                      {selectedTask.logs.map(log => (
-                        <option key={log.logId} value={log.logId}>
-                          log #{log.logId} (score: {log.score})
-                        </option>
-                      ))}
-                    </select>
-                    <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M6 9l6 6 6-6" />
-                    </svg>
-                  </div>
-                  <button
-                    onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
-                    disabled={step === trajectory.length - 1}
-                    className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333]"
-                  >
-                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </button>
-                </div>
+                  <p className="text-sm text-gray-400 mb-2 text-center">
+                    Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
+                    <span className="mx-2 text-[#333]">|</span>
+                    <span className="text-gray-300">{currentState.action}</span>
+                  </p>
+                </>
               )}
-              <div
-                className="grid"
-                style={{
-                  gridTemplateColumns: `repeat(${currentState.grid[0].length}, ${cellSize}px)`,
-                  gap: "2px"
-                }}
-              >
-                {currentState.grid.map((row, y) =>
-                  row.map((val, x) => {
-                    const objectHere = currentState.objects.find(o => o.x === x && o.y === y);
-                    const isSelected = objectHere !== undefined;
-                    const colorClass = colorMap[objectHere ? objectHere.color : val] || "bg-gray-300";
-                    const extraClass = isSelected ? "ring-2 ring-[#5A9485]" : "";
-                    return (
-                      <div
-                        key={`${x}-${y}`}
-                        className={`${colorClass} ${extraClass}`}
-                        style={{ width: cellSize, height: cellSize }}
-                      />
-                    );
-                  })
-                )}
+              <div className="flex items-center gap-3">
+                <button
+                  onClick={() => setStep(prev => Math.max(prev - 1, 0))}
+                  disabled={step === 0}
+                  className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333] shrink-0"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                  </svg>
+                </button>
+                <div
+                  className="grid"
+                  style={{
+                    gridTemplateColumns: `repeat(${currentState.grid[0].length}, ${cellSize}px)`,
+                    gap: "2px"
+                  }}
+                >
+                  {currentState.grid.map((row, y) =>
+                    row.map((val, x) => {
+                      const objectHere = currentState.objects.find(o => o.x === x && o.y === y);
+                      const isSelected = objectHere !== undefined;
+                      const colorClass = colorMap[objectHere ? objectHere.color : val] || "bg-gray-300";
+                      const extraClass = isSelected ? "ring-2 ring-[#5A9485]" : "";
+                      return (
+                        <div
+                          key={`${x}-${y}`}
+                          className={`${colorClass} ${extraClass}`}
+                          style={{ width: cellSize, height: cellSize }}
+                        />
+                      );
+                    })
+                  )}
+                </div>
+                <button
+                  onClick={() => setStep(prev => Math.min(prev + 1, trajectory.length - 1))}
+                  disabled={step === trajectory.length - 1}
+                  className="p-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white hover:border-[#5A9485] transition-colors disabled:opacity-30 disabled:hover:border-[#333] shrink-0"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M5 12h14M12 5l7 7-7 7" />
+                  </svg>
+                </button>
               </div>
-              <p className="text-sm text-gray-400 mt-2">
-                Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
-                <span className="mx-2 text-[#333]">|</span>
-                <span className="text-gray-300">{currentState.action}</span>
-              </p>
               {step === trajectory.length - 1 && trajectory.length > 1 && (
                 <div className="flex flex-col items-start gap-3 mt-4">
                   <button
