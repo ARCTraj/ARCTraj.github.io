@@ -495,21 +495,23 @@ export default function ArcTrajViewer() {
                 )}
               </div>
               {step === trajectory.length - 1 && trajectory.length > 1 && (
-                <button
-                  onClick={() => selectRandomLog(tasks)}
-                  className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
-                >
-                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
-                  </svg>
-                  Try Another Task
-                </button>
-                <button
-                  onClick={() => setSidebarOpen(true)}
-                  className="md:hidden mt-2 text-xs text-gray-500 hover:text-gray-300 transition-colors"
-                >
-                  or browse all 400 tasks
-                </button>
+                <>
+                  <button
+                    onClick={() => selectRandomLog(tasks)}
+                    className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
+                  >
+                    <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+                    </svg>
+                    Try Another Task
+                  </button>
+                  <button
+                    onClick={() => setSidebarOpen(true)}
+                    className="md:hidden mt-2 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                  >
+                    or browse all 400 tasks
+                  </button>
+                </>
               )}
             </div>
           ) : (
