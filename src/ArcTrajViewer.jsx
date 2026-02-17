@@ -86,6 +86,21 @@ export default function ArcTrajViewer() {
   const [arcTask, setArcTask] = useState(null);
   const [showTask, setShowTask] = useState(true);
 
+  const selectRandomLog = useCallback((taskList) => {
+    const allLogs = taskList.flatMap(t => t.logs.map(l => ({ taskId: t.id, ...l })));
+    const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
+    const ideal = allLogs.filter(l => l.score >= 85000 && l.score <= 93000);
+    const wider = allLogs.filter(l => l.score >= 85000 && l.score < 98000);
+    const safe = allLogs.filter(l => l.score > 0 && l.score < 98000);
+    const candidates = ideal.length > 0 ? ideal : wider.length > 0 ? wider : safe.length > 0 ? safe : allLogs;
+    const chosen = pick(candidates);
+    if (chosen) {
+      setSelectedTaskId(chosen.taskId);
+      setSelectedLogId(chosen.logId);
+      setStep(0);
+    }
+  }, []);
+
   useEffect(() => {
     Promise.all(CSV_FILES.map(path => fetch(path).then(res => res.text())))
       .then(fileTexts => {
@@ -132,18 +147,7 @@ export default function ArcTrajViewer() {
         setLoading(false);
 
         // Auto-select a random task/log on first load
-        const allLogs = taskList.flatMap(t => t.logs.map(l => ({ taskId: t.id, ...l })));
-        const pick = (arr) => arr[Math.floor(Math.random() * arr.length)];
-        const ideal = allLogs.filter(l => l.score >= 85000 && l.score <= 93000);
-        const wider = allLogs.filter(l => l.score >= 85000 && l.score < 98000);
-        const safe = allLogs.filter(l => l.score > 0 && l.score < 98000);
-        const candidates = ideal.length > 0 ? ideal : wider.length > 0 ? wider : safe.length > 0 ? safe : allLogs;
-        const chosen = pick(candidates);
-        if (chosen) {
-          setSelectedTaskId(chosen.taskId);
-          setSelectedLogId(chosen.logId);
-          setStep(0);
-        }
+        selectRandomLog(taskList);
       });
   }, []);
 
@@ -415,7 +419,7 @@ export default function ArcTrajViewer() {
             </div>
           )}
           {selectedTask && selectedLogId && (
-            <div className="w-full mb-3">
+            <div className="w-full mb-3 flex items-center">
               <select
                 value={selectedLogId}
                 onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
@@ -427,6 +431,15 @@ export default function ArcTrajViewer() {
                   </option>
                 ))}
               </select>
+              <button
+                onClick={() => selectRandomLog(tasks)}
+                className="ml-2 p-2 rounded-lg bg-[#1a1a1a] border border-[#333] text-gray-400 hover:text-white hover:border-[#5A9485] transition-colors"
+                title="Random Task"
+              >
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+                </svg>
+              </button>
             </div>
           )}
           {currentState ? (
@@ -479,6 +492,17 @@ export default function ArcTrajViewer() {
                   })
                 )}
               </div>
+              {step === trajectory.length - 1 && trajectory.length > 1 && (
+                <button
+                  onClick={() => selectRandomLog(tasks)}
+                  className="mt-4 inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
+                >
+                  <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M16 3h5v5M4 20L21 3M21 16v5h-5M15 15l6 6M4 4l5 5" />
+                  </svg>
+                  Try Another Task
+                </button>
+              )}
             </div>
           ) : (
             <div className="flex-grow flex flex-col items-center justify-center w-full gap-3">
