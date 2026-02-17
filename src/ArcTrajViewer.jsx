@@ -509,9 +509,12 @@ export default function ArcTrajViewer() {
                   </button>
                   <button
                     onClick={() => setSidebarOpen(true)}
-                    className="md:hidden mt-4 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                    className="md:hidden mt-4 inline-flex items-center gap-1.5 text-xs text-[#5A9485] hover:text-white transition-colors"
                   >
-                    or browse all 400 tasks
+                    <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M3 12h18M3 6h18M3 18h18" />
+                    </svg>
+                    browse all 400 tasks
                   </button>
                 </>
               )}
