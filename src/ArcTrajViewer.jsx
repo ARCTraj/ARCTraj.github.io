@@ -313,6 +313,16 @@ export default function ArcTrajViewer() {
                   </div>
 
                   {selectedTaskId === task.id && (
+                    <>
+                    {arcTask && (
+                      <div className="ml-3 mt-1.5 mb-1 flex items-center gap-1.5">
+                        <MiniGrid grid={arcTask.train[0].input} maxSize={32} />
+                        <svg className="w-2.5 h-2.5 text-gray-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                        <MiniGrid grid={arcTask.train[0].output} maxSize={32} />
+                      </div>
+                    )}
                     <ul className="ml-3 mt-1 mb-1 space-y-0.5 border-l border-[#333] pl-2 max-h-48 overflow-y-auto">
                       {task.logs.map((log) => (
                         <li
@@ -332,6 +342,7 @@ export default function ArcTrajViewer() {
                         </li>
                       ))}
                     </ul>
+                    </>
                   )}
                 </li>
               ))}
@@ -387,6 +398,21 @@ export default function ArcTrajViewer() {
                   </div>
                 </div>
               )}
+            </div>
+          )}
+          {selectedTask && selectedLogId && (
+            <div className="w-full mb-3">
+              <select
+                value={selectedLogId}
+                onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
+                className="bg-[#1a1a1a] border border-[#333] rounded-lg px-3 py-2 text-sm text-white cursor-pointer"
+              >
+                {selectedTask.logs.map(log => (
+                  <option key={log.logId} value={log.logId}>
+                    Log #{log.logId} (score: {log.score})
+                  </option>
+                ))}
+              </select>
             </div>
           )}
           {currentState ? (
