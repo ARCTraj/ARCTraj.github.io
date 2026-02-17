@@ -162,7 +162,14 @@ export default function ArcTrajViewer() {
 
   const selectedTask = tasks.find(task => task.id === selectedTaskId);
   const selectedLog = selectedTask?.logs.find(log => log.logId === selectedLogId);
-  const trajectory = useMemo(() => selectedLog?.trajectory || [], [selectedLog]);
+  const trajectory = useMemo(() => {
+    const traj = selectedLog?.trajectory || [];
+    if (arcTask && traj.length > 0) {
+      const initial = { time: -1, grid: arcTask.test[0].input, objects: [], action: "initial" };
+      return [initial, ...traj];
+    }
+    return traj;
+  }, [selectedLog, arcTask]);
   const currentState = trajectory[step];
 
   const updateCellSize = useCallback(() => {
