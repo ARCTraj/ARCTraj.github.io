@@ -84,7 +84,6 @@ export default function ArcTrajViewer() {
   const viewerRef = useRef(null);
   const [cellSize, setCellSize] = useState(40);
   const [arcTask, setArcTask] = useState(null);
-  const [showTask, setShowTask] = useState(true);
 
   const selectRandomLog = useCallback((taskList) => {
     const allLogs = taskList.flatMap(t => t.logs.map(l => ({ taskId: t.id, ...l })));
@@ -379,19 +378,11 @@ export default function ArcTrajViewer() {
 
         {/* 오른쪽 Trajectory Viewer */}
         <div ref={viewerRef} className="flex-grow p-6 flex flex-col items-start overflow-auto">
-          {/* ARC Task toggle */}
+          {/* ARC Task info */}
           {selectedTaskId && arcTask && (
             <div className="w-full mb-3">
               <div className="flex items-center gap-2 mb-2">
-                <button
-                  onClick={() => setShowTask(!showTask)}
-                  className="inline-flex items-center gap-1.5 text-xs text-gray-400 hover:text-white transition-colors"
-                >
-                  <svg className={`w-3 h-3 transition-transform ${showTask ? "rotate-90" : ""}`} viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M8 5l8 7-8 7z" />
-                  </svg>
-                  Task: {selectedTaskId}
-                </button>
+                <span className="text-xs text-gray-400">Task: {selectedTaskId}</span>
                 <button
                   onClick={() => selectRandomLog(tasks)}
                   className="p-1 rounded text-gray-500 hover:text-white transition-colors"
@@ -402,11 +393,12 @@ export default function ArcTrajViewer() {
                   </svg>
                 </button>
               </div>
-              {showTask && (
-                <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1 overflow-x-auto md:overflow-x-visible">
-                  <div className="flex gap-4 w-max md:w-auto md:flex-wrap">
-                    {arcTask.train.map((pair, i) => (
-                      <div key={i} className="flex items-center gap-2">
+              <div className="border border-[#212121] rounded-lg bg-[#141414] p-3 mb-1 overflow-x-auto">
+                <div className="flex items-center gap-3 w-max">
+                  {arcTask.train.map((pair, i) => (
+                    <React.Fragment key={i}>
+                      {i > 0 && <div className="w-px h-10 bg-[#333] shrink-0" />}
+                      <div className="flex items-center gap-2">
                         <div className="text-center">
                           <p className="text-[10px] text-gray-500 mb-1">In {i + 1}</p>
                           <MiniGrid grid={pair.input} />
@@ -419,23 +411,24 @@ export default function ArcTrajViewer() {
                           <MiniGrid grid={pair.output} />
                         </div>
                       </div>
-                    ))}
-                    <div className="flex items-center gap-2">
-                      <div className="text-center">
-                        <p className="text-[10px] text-[#5A9485] mb-1 font-medium">Test</p>
-                        <MiniGrid grid={arcTask.test[0].input} />
-                      </div>
-                      <svg className="w-3 h-3 text-gray-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M5 12h14M12 5l7 7-7 7" />
-                      </svg>
-                      <div className="text-center">
-                        <p className="text-[10px] text-gray-500 mb-1">?</p>
-                        <div className="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs">?</div>
-                      </div>
+                    </React.Fragment>
+                  ))}
+                  <div className="w-px h-10 bg-[#333] shrink-0" />
+                  <div className="flex items-center gap-2">
+                    <div className="text-center">
+                      <p className="text-[10px] text-[#5A9485] mb-1 font-medium">Test</p>
+                      <MiniGrid grid={arcTask.test[0].input} />
+                    </div>
+                    <svg className="w-3 h-3 text-gray-500 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M12 5l7 7-7 7" />
+                    </svg>
+                    <div className="text-center">
+                      <p className="text-[10px] text-gray-500 mb-1">?</p>
+                      <div className="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs">?</div>
                     </div>
                   </div>
                 </div>
-              )}
+              </div>
             </div>
           )}
           {selectedTask && selectedLogId && (
