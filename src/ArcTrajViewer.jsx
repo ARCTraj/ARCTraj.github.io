@@ -424,17 +424,7 @@ export default function ArcTrajViewer() {
                     </svg>
                     <div className="text-center">
                       <p className="text-[10px] text-gray-500 mb-1">Answer</p>
-                      {(() => {
-                        const testGrid = arcTask.test[0].input;
-                        const rows = testGrid.length;
-                        const cols = testGrid[0].length;
-                        const cell = Math.max(Math.floor(Math.min(80 / cols, 80 / rows)), 2);
-                        const w = cols * cell + (cols - 1);
-                        const h = rows * cell + (rows - 1);
-                        return (
-                          <div className="border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs" style={{ width: w, height: h }}>?</div>
-                        );
-                      })()}
+                      <div className="w-10 h-10 border border-[#333] rounded flex items-center justify-center text-gray-500 text-xs">?</div>
                     </div>
                   </div>
                 </div>
