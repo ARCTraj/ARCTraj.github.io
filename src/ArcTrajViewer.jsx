@@ -467,7 +467,8 @@ export default function ArcTrajViewer() {
           {currentState ? (
             <div>
               {selectedTask && selectedLogId && (
-                <div className="flex items-center justify-between mb-2">
+                <>
+                <div className="mb-2">
                   <div className="relative inline-block md:hidden">
                     <select
                       value={selectedLogId}
@@ -500,12 +501,13 @@ export default function ArcTrajViewer() {
                       <path d="M6 9l6 6 6-6" />
                     </svg>
                   </div>
-                  <p className="text-sm text-gray-400 truncate">
-                    Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
-                    <span className="mx-2 text-[#333]">|</span>
-                    <span className="text-gray-300">{currentState.action}</span>
-                  </p>
                 </div>
+                <p className="text-sm text-gray-400 mb-2 text-center">
+                  Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
+                  <span className="mx-2 text-[#333]">|</span>
+                  <span className="text-gray-300">{currentState.action}</span>
+                </p>
+                </>
               )}
               <div className="flex items-center justify-between w-full">
                 <button
