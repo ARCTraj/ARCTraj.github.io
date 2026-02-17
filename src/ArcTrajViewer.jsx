@@ -370,6 +370,7 @@ export default function ArcTrajViewer() {
                       {task.logs.map((log) => (
                         <li
                           key={log.logId}
+                          ref={selectedLogId === log.logId ? (el) => el?.scrollIntoView({ block: "nearest" }) : undefined}
                           className={`cursor-pointer px-2 py-1 rounded text-xs transition-colors ${
                             selectedLogId === log.logId
                               ? "bg-[#5A9485]/20 text-[#5A9485]"
