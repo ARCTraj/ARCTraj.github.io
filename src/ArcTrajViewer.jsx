@@ -504,6 +504,12 @@ export default function ArcTrajViewer() {
                   </svg>
                   Try Another Task
                 </button>
+                <button
+                  onClick={() => setSidebarOpen(true)}
+                  className="md:hidden mt-2 text-xs text-gray-500 hover:text-gray-300 transition-colors"
+                >
+                  or browse all 400 tasks
+                </button>
               )}
             </div>
           ) : (
