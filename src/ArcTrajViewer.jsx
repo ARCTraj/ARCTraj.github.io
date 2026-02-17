@@ -172,7 +172,7 @@ export default function ArcTrajViewer() {
     const rows = currentState.grid.length;
     const gap = 2;
     const padding = 48;
-    const reservedHeight = 280;
+    const reservedHeight = 330;
     const availW = el.clientWidth - padding - (cols - 1) * gap;
     const availH = el.clientHeight - reservedHeight - (rows - 1) * gap;
     const size = Math.min(Math.floor(availW / cols), Math.floor(availH / rows), 40);
