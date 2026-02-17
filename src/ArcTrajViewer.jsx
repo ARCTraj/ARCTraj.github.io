@@ -197,7 +197,7 @@ export default function ArcTrajViewer() {
     const navButtons = 80;
     const availW = rowEl.clientWidth - navButtons - (cols - 1) * gap;
     const availH = rowEl.clientHeight - (rows - 1) * gap;
-    const size = Math.floor(Math.min(availW / cols, availH / rows, 40) * 0.7);
+    const size = Math.floor(Math.min(availW / cols, availH / rows, 40) * 0.8);
     setCellSize(Math.max(size, 4));
   }, [currentState]);
 
@@ -466,7 +466,7 @@ export default function ArcTrajViewer() {
             <div className="w-full flex-grow flex flex-col min-h-0">
               {selectedTask && selectedLogId && (
                 <>
-                <div className="mb-2 shrink-0">
+                <div className="mt-5 mb-2 shrink-0">
                   <div className="relative inline-block md:hidden">
                     <select
                       value={selectedLogId}
@@ -500,7 +500,7 @@ export default function ArcTrajViewer() {
                     </svg>
                   </div>
                 </div>
-                <p className="text-sm text-gray-400 mb-2 text-center shrink-0 font-mono">
+                <p className="text-sm text-gray-400 mb-0 text-center shrink-0 font-mono">
                   Step{' '}
                   <span className="text-white font-medium inline-block w-[1.25ch] text-right">{step}</span>
                   /
@@ -554,7 +554,7 @@ export default function ArcTrajViewer() {
                   </svg>
                 </button>
               </div>
-              <div className={`flex flex-col items-center gap-3 mt-4 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
+              <div className={`flex flex-col items-center gap-3 mt-2 shrink-0 ${step === trajectory.length - 1 && trajectory.length > 1 ? "" : "invisible"}`}>
                 <button
                   onClick={() => selectRandomLog(tasks)}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
