@@ -466,49 +466,47 @@ export default function ArcTrajViewer() {
           {currentState ? (
             <div>
               {selectedTask && selectedLogId && (
-                <>
-                  <div className="mb-2">
-                    <div className="relative inline-block md:hidden">
-                      <select
-                        value={selectedLogId}
-                        onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
-                        className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
-                      >
-                        {selectedTask.logs.map(log => (
-                          <option key={log.logId} value={log.logId}>
-                            log #{log.logId}{log.score === 0 ? " (failed)" : ""}
-                          </option>
-                        ))}
-                      </select>
-                      <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M6 9l6 6 6-6" />
-                      </svg>
-                    </div>
-                    <div className="relative hidden md:inline-block">
-                      <select
-                        value={selectedLogId}
-                        onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
-                        className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
-                      >
-                        {selectedTask.logs.map(log => (
-                          <option key={log.logId} value={log.logId}>
-                            log #{log.logId} (score: {log.score})
-                          </option>
-                        ))}
-                      </select>
-                      <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M6 9l6 6 6-6" />
-                      </svg>
-                    </div>
+                <div className="flex items-center justify-between mb-2">
+                  <div className="relative inline-block md:hidden">
+                    <select
+                      value={selectedLogId}
+                      onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
+                      className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
+                    >
+                      {selectedTask.logs.map(log => (
+                        <option key={log.logId} value={log.logId}>
+                          log #{log.logId}{log.score === 0 ? " (failed)" : ""}
+                        </option>
+                      ))}
+                    </select>
+                    <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
                   </div>
-                  <p className="text-sm text-gray-400 mb-2 text-center">
+                  <div className="relative hidden md:inline-block">
+                    <select
+                      value={selectedLogId}
+                      onChange={(e) => { setSelectedLogId(Number(e.target.value)); setStep(0); }}
+                      className="appearance-none bg-[#1a1a1a] border border-[#333] rounded-lg pl-3 pr-8 py-2 text-sm text-white cursor-pointer"
+                    >
+                      {selectedTask.logs.map(log => (
+                        <option key={log.logId} value={log.logId}>
+                          log #{log.logId} (score: {log.score})
+                        </option>
+                      ))}
+                    </select>
+                    <svg className="pointer-events-none absolute right-2.5 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-gray-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M6 9l6 6 6-6" />
+                    </svg>
+                  </div>
+                  <p className="text-sm text-gray-400 truncate">
                     Step <span className="text-white font-medium">{step}/{trajectory.length - 1}</span>
                     <span className="mx-2 text-[#333]">|</span>
                     <span className="text-gray-300">{currentState.action}</span>
                   </p>
-                </>
+                </div>
               )}
-              <div className="flex items-center gap-3">
+              <div className="flex items-center justify-between w-full">
                 <button
                   onClick={() => setStep(prev => Math.max(prev - 1, 0))}
                   disabled={step === 0}
@@ -552,7 +550,7 @@ export default function ArcTrajViewer() {
                 </button>
               </div>
               {step === trajectory.length - 1 && trajectory.length > 1 && (
-                <div className="flex flex-col items-start gap-3 mt-4">
+                <div className="flex flex-col items-center gap-3 mt-4">
                   <button
                     onClick={() => selectRandomLog(tasks)}
                     className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-[#5A9485] text-white text-sm font-medium hover:bg-[#4a8374] transition-colors"
