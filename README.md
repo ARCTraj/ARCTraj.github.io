@@ -10,7 +10,7 @@ Sejin Kim, Hayan Choi, Seokki Lee, Sundong Kim
 
 ## Links
 
-- [Paper (arXiv)](https://arxiv.org/abs/2506.05292)
+- [Paper (arXiv)](https://arxiv.org/abs/2511.11079)
 - [Dataset (HuggingFace)](https://huggingface.co/datasets/SejinKimm/ARCTraj)
 - [Interactive Demo](https://arctraj.github.io/demo)
 

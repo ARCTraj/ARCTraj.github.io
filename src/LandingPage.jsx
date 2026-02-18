@@ -246,7 +246,7 @@ export default function LandingPage() {
       <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[#0E0E0E]/90 backdrop-blur-sm border-t border-[#212121] py-3 px-4 transition-all duration-300 ${showNav ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
         <div className="flex justify-center gap-6 text-sm text-gray-400">
           <a
-            href="https://arxiv.org/abs/2506.05292"
+            href="https://arxiv.org/abs/2511.11079"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 hover:text-white transition-colors"
@@ -314,7 +314,7 @@ export default function LandingPage() {
             KDD 2026 Datasets and Benchmarks
           </p>
           <div className="flex flex-wrap justify-center gap-3">
-            <LinkButton href="https://arxiv.org/abs/2506.05292">
+            <LinkButton href="https://arxiv.org/abs/2511.11079">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 13H8v-2h2v2zm4 0h-2v-2h2v2zm0-4H8v-2h6v2z" />
               </svg>
