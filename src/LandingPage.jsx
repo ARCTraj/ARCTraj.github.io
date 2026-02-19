@@ -706,9 +706,6 @@ export default function LandingPage() {
       <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>More from Our Group</SectionTitle>
-          <p className="text-gray-300 leading-relaxed text-base mb-8">
-            Our group also explores ARC beyond trajectory analysis. We create new datasets and benchmarks, evaluate LLM reasoning, and develop program synthesis approaches for ARC.
-          </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
               <div
