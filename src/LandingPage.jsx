@@ -647,8 +647,8 @@ export default function LandingPage() {
             </div>
             <div className="p-5 flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-sm font-semibold text-white mb-1">Interested in how LLMs reason on ARC?</h3>
-                <p className="text-gray-400 text-xs leading-relaxed">We also explore how large language models tackle ARC, uncovering where they struggle with abstract pattern recognition.</p>
+                <h3 className="text-sm font-semibold text-white mb-1">Also from our group: How do LLMs reason on ARC?</h3>
+                <p className="text-gray-400 text-xs leading-relaxed">Beyond human trajectories, we systematically evaluate LLMs on ARC to reveal where they fall short in logical coherence, compositionality, and productivity.</p>
               </div>
               <a
                 href="https://dl.acm.org/doi/10.1145/3712701"
