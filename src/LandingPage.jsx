@@ -707,34 +707,9 @@ export default function LandingPage() {
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>More from Our Group</SectionTitle>
           <p className="text-gray-300 leading-relaxed text-base mb-8">
-            Our group tackles ARC from multiple angles beyond trajectory analysis, from evaluating LLMs and rethinking task formats to creating new datasets for abstract reasoning.
+            Our group also explores ARC beyond trajectory analysis. We create new datasets and benchmarks, evaluate LLM reasoning, and develop program synthesis approaches for ARC.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
-              <div
-                className="bg-white p-4 cursor-zoom-in"
-                onClick={() => openLightbox("/figures/LoTH_Concepts-ARC.png", "LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity")}
-              >
-                <img src="/figures/LoTH_Concepts-ARC.png" alt="LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity" className="w-full" />
-              </div>
-              <div className="p-5 flex-grow flex flex-col">
-                <h3 className="text-base font-semibold text-white mb-1.5">LLM Reasoning on ARC</h3>
-                <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  Systematically evaluates LLMs on ARC, revealing where they fall short in logical coherence, compositionality, and productivity.
-                </p>
-                <a
-                  href="https://dl.acm.org/doi/10.1145/3712701"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 mt-auto text-[#5A9485] text-sm font-medium hover:underline"
-                >
-                  ACM TIST 2025
-                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                  </svg>
-                </a>
-              </div>
-            </div>
             <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
               <div
                 className="bg-white p-4 cursor-zoom-in"
@@ -768,7 +743,7 @@ export default function LandingPage() {
                 <img src="/figures/GIFARC_pipeline.png" alt="GIFARC: GIF-based visual abstraction extraction and ARC-style task generation pipeline" className="w-full" />
               </div>
               <div className="p-5 flex-grow flex flex-col">
-                <h3 className="text-base font-semibold text-white mb-1.5">Analogy-Driven ARC Task Generation</h3>
+                <h3 className="text-base font-semibold text-white mb-1.5">GIF-Inspired ARC Task Generation</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
                   <a href="https://gifarc.vercel.app/v1.2" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">GIFARC</a> generates ARC-style tasks that encode analogies inherent in GIFs, building a dataset that grounds abstract visual transformations in everyday concepts to improve LLM reasoning.
                 </p>
@@ -779,6 +754,31 @@ export default function LandingPage() {
                   className="inline-flex items-center gap-1.5 mt-auto text-[#5A9485] text-sm font-medium hover:underline"
                 >
                   arXiv 2025
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
+              <div
+                className="bg-white p-4 cursor-zoom-in"
+                onClick={() => openLightbox("/figures/LoTH_Concepts-ARC.png", "LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity")}
+              >
+                <img src="/figures/LoTH_Concepts-ARC.png" alt="LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity" className="w-full" />
+              </div>
+              <div className="p-5 flex-grow flex flex-col">
+                <h3 className="text-base font-semibold text-white mb-1.5">Evaluating LLM Reasoning with ARC</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                  Systematically evaluates LLMs on ARC, revealing where they fall short in logical coherence, compositionality, and productivity.
+                </p>
+                <a
+                  href="https://dl.acm.org/doi/10.1145/3712701"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-auto text-[#5A9485] text-sm font-medium hover:underline"
+                >
+                  ACM TIST 2025
                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
                   </svg>
