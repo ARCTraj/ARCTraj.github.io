@@ -558,8 +558,8 @@ export default function LandingPage() {
                     ["Average trajectories per task", "25.5"],
                     ["Average trajectory length", "9.8 steps"],
                     ["Success rate", "82.3%"],
-                    ["Object-related operations", "37.7%"],
-                    ["Cross-trajectory shared grids", "43.7%"],
+                    ["Object-related operation ratio", "37.7%"],
+                    ["Cross-trajectory shared grid ratio", "43.7%"],
                   ].map(([label, value]) => (
                     <tr key={label}>
                       <td className="py-2.5 text-gray-400">{label}</td>
