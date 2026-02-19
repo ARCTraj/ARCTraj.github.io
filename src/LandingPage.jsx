@@ -359,13 +359,26 @@ export default function LandingPage() {
         <div className="max-w-screen-lg mx-auto">
           <SectionTitle>Abstract</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
-            <p className="text-gray-300 leading-relaxed text-base">{ABSTRACT}</p>
+            <div>
+              <p className="text-gray-300 leading-relaxed text-base">As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the <a href="https://arxiv.org/abs/1911.01547" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Abstraction and Reasoning Corpus (ARC)</a>. Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations, including object selection, color changes, movements, rotations, and other transformations, along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.</p>
+              <a
+                href="https://arcprize.org/arc-agi"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 mt-4 text-[#5A9485] text-sm font-medium hover:underline"
+              >
+                Learn more about ARC
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+              </a>
+            </div>
             <div className="w-72">
               <FigureCard
                 src="/figures/arc_task_examples_2tasks.png"
                 alt="Examples of ARC tasks: demonstration input-output pairs and test input with unknown output"
                 title="ARC Task Examples"
-                description="Each task consists of demonstration input-output pairs that define a hidden transformation rule, and a test input for which the solver must produce the correct output."
+                description={<>Each task consists of demonstration input-output pairs that define a hidden transformation rule, and a test input for which the solver must produce the correct output. Try them on O2ARC: <a href="https://o2arc.com/task/c0f76784" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Task 1</a>, <a href="https://o2arc.com/task/23b5c85d" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Task 2</a>.</>}
                 onImageClick={openLightbox}
               />
             </div>
@@ -373,30 +386,74 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Data Collection Platform */}
+      {/* Platform */}
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+        <div className="max-w-screen-md mx-auto">
+          <SectionTitle>Platform</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
+              <div
+                className="bg-white p-4 cursor-zoom-in"
+                onClick={() => openLightbox("/figures/o2arc_solve.png", "O2ARC 3.0 platform interface")}
+              >
+                <img src="/figures/o2arc_solve.png" alt="O2ARC 3.0 platform interface" className="w-full" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-semibold text-white mb-2">
+                  O2ARC 3.0
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                  ARCTraj is collected through O2ARC 3.0, an interactive web-based platform where participants solve ARC tasks using object-level operations such as selection, coloring, movement, rotation, and copy-paste. The platform records every action as a structured trajectory with precise positional and temporal information.
+                </p>
+                <a
+                  href="https://o2arc.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#5A9485] text-sm font-medium hover:underline"
+                >
+                  o2arc.com
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
+              <div
+                className="bg-white p-4 cursor-zoom-in"
+                onClick={() => openLightbox("/figures/arcle_step.png", "ARCLE step mechanism")}
+              >
+                <img src="/figures/arcle_step.png" alt="ARCLE step mechanism: Current State → Action → Next State" className="w-full" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-base font-semibold text-white mb-2">
+                  ARCLE
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-4">
+                  ARCLE (Abstraction and Reasoning Corpus Learning Environment) is a Gymnasium-based RL environment that defines structured action and observation spaces for ARC tasks. It provides the foundation for training RL agents on ARC, enabling the trajectory-based learning approaches in downstream applications.
+                </p>
+                <a
+                  href="https://proceedings.mlr.press/v274/lee25a.html"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-[#5A9485] text-sm font-medium hover:underline"
+                >
+                  CoLLAs 2024
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Dataset Construction */}
       <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Dataset Construction</SectionTitle>
-          <div className="border border-[#212121] rounded-xl bg-[#141414] p-6 hover:border-[#333] transition-colors">
-            <h3 className="text-base font-semibold text-white mb-2">
-              O2ARC 3.0
-            </h3>
-            <p className="text-gray-400 text-sm leading-relaxed mb-4">
-              ARCTraj is collected through O2ARC 3.0, an interactive web-based platform where participants solve ARC tasks using object-level operations such as selection, coloring, movement, rotation, and copy-paste. The platform records every action as a structured trajectory with precise positional and temporal information.
-            </p>
-            <a
-              href="https://o2arc.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-[#5A9485] text-sm font-medium hover:underline"
-            >
-              o2arc.com
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-              </svg>
-            </a>
-          </div>
-          <div className="mt-8 grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <FigureCard
               src="/figures/data_generation_process.png"
               alt="Data generation process: Humans solve ARC tasks, generating task-solving trajectories that are logged into the ARCTraj dataset"
@@ -413,7 +470,7 @@ export default function LandingPage() {
             />
           </div>
           {/* Dataset Summary Statistics */}
-          <div className="mt-8 border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
+          <div className="mt-6 border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
             <div className="p-5 pb-0">
               <h3 className="text-base font-semibold text-white mb-1.5">
                 Dataset Summary
