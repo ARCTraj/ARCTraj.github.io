@@ -430,7 +430,7 @@ export default function LandingPage() {
                   ARCLE
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  <a href="https://github.com/ConfeitoHS/arcle" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCLE</a> (Abstraction and Reasoning Corpus Learning Environment) is a Gymnasium-based RL environment that defines structured action and observation spaces for ARC tasks. It provides the foundation for training RL agents on ARC, enabling the trajectory-based learning approaches in downstream applications.
+                  <a href="https://github.com/ConfeitoHS/arcle" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCLE</a> (Abstraction and Reasoning Corpus Learning Environment) is a Gymnasium-based RL environment that defines structured action and observation spaces for ARC tasks. It provides the foundation for training RL agents on ARC, enabling the trajectory-based learning approaches in downstream applications. Its JAX reimplementation, <a href="https://arxiv.org/abs/2601.17564" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">JaxARC</a>, further accelerates environment throughput for large-scale experiments.
                 </p>
                 <a
                   href="https://proceedings.mlr.press/v274/lee25a.html"
