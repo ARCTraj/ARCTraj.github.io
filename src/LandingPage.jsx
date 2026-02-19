@@ -143,34 +143,32 @@ export default function LandingPage() {
   const [copied, setCopied] = useState(false);
   const [lightbox, setLightbox] = useState(null);
 
-  const containerRef = useRef(null);
+  const wrapperRef = useRef(null);
   const heroRef = useRef(null);
   const [showNav, setShowNav] = useState(false);
   const openLightbox = useCallback((src, alt) => setLightbox({ src, alt }), []);
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
   useEffect(() => {
-    const container = containerRef.current;
     const hero = heroRef.current;
-    if (!container || !hero) return;
+    if (!hero) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => setShowNav(!entry.isIntersecting),
-      { root: container, threshold: 0.1 }
+      { root: null, threshold: 0.1 }
     );
     observer.observe(hero);
     return () => observer.disconnect();
   }, []);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const scrollEl = document.documentElement;
 
     const scrollWithoutSnap = (top) => {
-      container.style.scrollSnapType = 'none';
-      container.scrollTo({ top, behavior: "smooth" });
-      const restore = () => { container.style.scrollSnapType = ''; };
-      container.addEventListener('scrollend', restore, { once: true });
+      scrollEl.style.scrollSnapType = 'none';
+      window.scrollTo({ top, behavior: "smooth" });
+      const restore = () => { scrollEl.style.scrollSnapType = ''; };
+      window.addEventListener('scrollend', restore, { once: true });
       setTimeout(restore, 1000);
     };
 
@@ -180,9 +178,11 @@ export default function LandingPage() {
       if (!keys.includes(e.key)) return;
 
       e.preventDefault();
-      const sections = container.querySelectorAll(":scope > section");
-      const scrollTop = container.scrollTop;
-      const viewportHeight = container.clientHeight;
+      const wrapper = wrapperRef.current;
+      if (!wrapper) return;
+      const sections = wrapper.querySelectorAll(":scope > section");
+      const scrollTop = window.scrollY;
+      const viewportHeight = window.innerHeight;
       const threshold = 10;
 
       if (e.key === "Home") {
@@ -239,7 +239,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div ref={containerRef} className="h-screen overflow-y-auto overflow-x-hidden snap-y snap-proximity md:snap-mandatory scroll-smooth bg-[#0E0E0E] text-white">
+    <div ref={wrapperRef} className="bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
 
       {/* Fixed bottom nav */}
@@ -360,14 +360,14 @@ export default function LandingPage() {
           <SectionTitle>Abstract</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
             <div>
-              <p className="text-gray-300 leading-relaxed text-base">As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the <a href="https://arxiv.org/abs/1911.01547" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Abstraction and Reasoning Corpus (ARC)</a>. Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations, including object selection, color changes, movements, rotations, and other transformations, along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.</p>
+              <p className="text-gray-300 leading-relaxed text-base">As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the <a href="https://arcprize.org/arc-agi" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Abstraction and Reasoning Corpus (ARC)</a>. Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations, including object selection, color changes, movements, rotations, and other transformations, along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.</p>
               <a
-                href="https://arcprize.org/arc-agi"
+                href="https://arxiv.org/abs/1911.01547"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-1.5 mt-4 text-[#5A9485] text-sm font-medium hover:underline"
               >
-                Learn more about ARC
+                On the Measure of Intelligence (Chollet, 2019)
                 <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
                 </svg>
@@ -403,15 +403,15 @@ export default function LandingPage() {
                   O2ARC 3.0
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  ARCTraj is collected through O2ARC 3.0, an interactive web-based platform where participants solve ARC tasks using object-level operations such as selection, coloring, movement, rotation, and copy-paste. The platform records every action as a structured trajectory with precise positional and temporal information.
+                  ARCTraj is collected through <a href="https://o2arc.com/" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">O2ARC 3.0</a>, an interactive web-based platform where participants solve ARC tasks using object-level operations such as selection, coloring, movement, rotation, and copy-paste. The platform records every action as a structured trajectory with precise positional and temporal information.
                 </p>
                 <a
-                  href="https://o2arc.com/"
+                  href="https://www.ijcai.org/proceedings/2024/1034"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 text-[#5A9485] text-sm font-medium hover:underline"
                 >
-                  o2arc.com
+                  IJCAI 2024 Demo
                   <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
                   </svg>

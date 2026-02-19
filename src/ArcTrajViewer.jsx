@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef, useCallback } from "react";
+import React, { useState, useEffect, useMemo, useRef, useCallback, useLayoutEffect } from "react";
 import { Link } from "react-router-dom";
 import Papa from "papaparse";
 
@@ -75,6 +75,11 @@ function MiniGrid({ grid, maxSize = 80, cellSize: forcedCellSize }) {
 }
 
 export default function ArcTrajViewer() {
+  useLayoutEffect(() => {
+    document.documentElement.style.scrollSnapType = 'none';
+    return () => { document.documentElement.style.scrollSnapType = ''; };
+  }, []);
+
   const [tasks, setTasks] = useState([]);
   const [selectedTaskId, setSelectedTaskId] = useState(null);
   const [selectedLogId, setSelectedLogId] = useState(null);
