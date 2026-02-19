@@ -586,7 +586,7 @@ export default function LandingPage() {
                   Color Origins
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  66.5% of tasks are covered by test input colors alone; 100% with example outputs added. Our follow-up work, <a href="https://arxiv.org/abs/2411.18158" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCKG</a>, further leverages these color patterns through knowledge graphs to predict output grid size and color sets.
+                  66.5% of tasks are covered by test input colors alone; 100% with example outputs added. Our follow-up work, <a href="https://www.youtube.com/watch?v=TexAZEdnqdg" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCKG</a>, further leverages these color patterns through knowledge graphs to predict output grid size and color sets.
                 </p>
                 <table className="w-full text-xs">
                   <thead>
@@ -615,7 +615,7 @@ export default function LandingPage() {
                   </tbody>
                 </table>
                 <a
-                  href="https://arxiv.org/abs/2411.18158"
+                  href="https://ceur-ws.org/Vol-3819/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-3 text-[#5A9485] text-xs font-medium hover:underline"
@@ -667,7 +667,7 @@ export default function LandingPage() {
             <AppCard
               src="/figures/decision_transformer.png"
               alt="Decision Transformer architecture for trajectory-based learning on ARC"
-              title="Decision Transformer"
+              title="Trajectory-Based Sequential Modeling"
               description={<>Applies <a href="https://github.com/GIST-DSLab/ARC_DT" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Decision Transformer</a> to ARC by augmenting state representations with object-level information to mimic human problem-solving trajectories.</>}
               links={[
                 { label: "ICML '23 Workshop", href: "https://arxiv.org/abs/2306.08204" },
@@ -677,8 +677,8 @@ export default function LandingPage() {
             <AppCard
               src="/figures/gflownet_diagram.png"
               alt="GFlowNet action generation and state transition through ARCLE"
-              title="GFlowNet"
-              description={<>Generates diverse action sequences by modeling the <a href="https://github.com/GIST-DSLab/GFN_to_ARC" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">distribution over trajectories</a> proportional to a reward function.</>}
+              title="Generative Flow Networks"
+              description={<>Applies <a href="https://github.com/GIST-DSLab/GFN_to_ARC" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">GFlowNet</a> to sample diverse action sequences proportional to a reward function, exploring multiple solving strategies rather than converging on a single trajectory.</>}
               links={[{ label: "TMLR '25", href: "https://tmlr.infinite-conf.org/paper_pages/ULCOhBgGzy.html" }]}
               onImageClick={openLightbox}
             />
@@ -686,15 +686,15 @@ export default function LandingPage() {
               src="/figures/ldcq_pipeline.png"
               alt="Offline RL with latent diffusion model sampling and Q-network for action prediction"
               title="Offline RL with Latent Diffusion"
-              description={<>Combines <a href="https://github.com/GIST-DSLab/LDCQ" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">diffusion model sampling with Q-network evaluation</a> to generate and select high-quality candidate actions in the latent space.</>}
+              description={<>Uses <a href="https://github.com/GIST-DSLab/LDCQ" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">LDCQ</a> to combine diffusion model sampling with Q-network evaluation, generating and selecting high-quality candidate actions in the latent space.</>}
               links={[{ label: "arXiv '24", href: "https://arxiv.org/abs/2410.11324" }]}
               onImageClick={openLightbox}
             />
             <AppCard
               src="/figures/world_model_learning.png"
               alt="DreamerV3 world model learning with encoder-decoder architecture for state prediction"
-              title="DreamerV3"
-              description={<>Learns a <a href="https://github.com/GIST-DSLab/Dreamerv3onARCLE" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">latent dynamics model</a> that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning.</>}
+              title="World Model Learning"
+              description={<>Applies <a href="https://github.com/GIST-DSLab/Dreamerv3onARCLE" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">DreamerV3</a> to learn a latent dynamics model that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning.</>}
               links={[{ label: "IJCAI '24 Workshop", href: "https://arxiv.org/abs/2408.14855" }]}
               onImageClick={openLightbox}
             />
