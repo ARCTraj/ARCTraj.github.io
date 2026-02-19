@@ -275,7 +275,7 @@ export default function LandingPage() {
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
 
       {/* Outline nav (PC only) */}
-      <nav className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3 transition-all duration-300 ${showNav ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+      <nav className="fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3">
         {OUTLINE_SECTIONS.map((s) => (
           <button
             key={s.id}
