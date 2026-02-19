@@ -407,17 +407,6 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
             <div>
               <p className="text-gray-300 leading-relaxed text-base">As artificial intelligence reasoning abilities gain prominence, understanding how humans approach abstract reasoning tasks becomes increasingly important. We introduce ARCTraj, a large-scale dataset capturing detailed human reasoning trajectories from interactive sessions on the <a href="https://arcprize.org/arc-agi" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Abstraction and Reasoning Corpus (ARC)</a>. Our dataset comprises approximately 10,000 trajectories across 400 ARC tasks, recording fine-grained, object-level actions that reveal how humans perceive, manipulate, and transform grid-based visual patterns. Each trajectory captures the complete sequence of operations, including object selection, color changes, movements, rotations, and other transformations, along with precise positional information and timestamps. We provide comprehensive benchmarking analyses revealing key insights into human problem-solving strategies, including selection biases in task engagement, systematic patterns in color attribution, and evidence of shared intentionality among participants. ARCTraj enables new research directions at the intersection of cognitive science and artificial intelligence, supporting studies in human reasoning analysis, trajectory-based learning, and the development of AI systems that can learn from human problem-solving processes.</p>
-              <a
-                href="https://arxiv.org/abs/1911.01547"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 mt-4 text-[#5A9485] text-sm font-medium hover:underline"
-              >
-                On the Measure of Intelligence (Chollet, 2019)
-                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-                </svg>
-              </a>
             </div>
             <div className="w-72">
               <FigureCard
@@ -632,7 +621,7 @@ export default function LandingPage() {
                   Color Origins
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  66.5% of tasks are covered by test input colors alone; 100% with example outputs added. Our follow-up work, <a href="https://www.youtube.com/watch?v=TexAZEdnqdg" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCKG</a>, further leverages these color patterns through knowledge graphs to predict output grid size and color sets.
+                  66.5% of tasks are covered by test input colors alone; 100% with example outputs added. <a href="https://www.youtube.com/watch?v=TexAZEdnqdg" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCKG</a> extends this with knowledge graphs for output prediction.
                 </p>
                 <table className="w-full text-xs">
                   <thead>
