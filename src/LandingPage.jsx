@@ -554,12 +554,12 @@ export default function LandingPage() {
                 <tbody className="divide-y divide-[#212121]">
                   {[
                     ["Number of trajectories", "10,672"],
-                    ["Number of users", "100"],
+                    ["Avg. participants per task", "13.9"],
+                    ["Avg. trajectories per task", "25.5"],
                     ["Mean trajectory length", "9.8 steps"],
                     ["Success rate", "82.3%"],
                     ["Object-related operations", "37.7%"],
                     ["Cross-trajectory shared grids", "43.7%"],
-                    ["Average time per task", "42.7 sec"],
                   ].map(([label, value]) => (
                     <tr key={label}>
                       <td className="py-2.5 text-gray-400">{label}</td>
