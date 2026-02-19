@@ -555,10 +555,11 @@ export default function LandingPage() {
                   {[
                     ["Number of trajectories", "10,672"],
                     ["Number of unique ARC tasks", "400"],
-                    ["Number of users", "327"],
+                    ["Number of users", "100"],
                     ["Mean trajectory length", "9.8"],
                     ["Success rate", "82.3%"],
-                    ["Most frequent action type", "move"],
+                    ["Object-related operations", "37.7%"],
+                    ["Cross-trajectory shared grids", "43.7%"],
                     ["Average time per task", "42.7 sec"],
                   ].map(([label, value]) => (
                     <tr key={label}>
