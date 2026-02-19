@@ -163,6 +163,7 @@ export default function LandingPage() {
   }, []);
 
   const OUTLINE_SECTIONS = [
+    { id: "hero", label: "ARCTraj" },
     { id: "abstract", label: "Abstract" },
     { id: "contributions", label: "Contributions" },
     { id: "platforms", label: "Platforms" },
@@ -324,7 +325,7 @@ export default function LandingPage() {
       </div>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="min-h-screen snap-start flex flex-col items-center justify-center px-4 relative">
+      <section id="hero" ref={heroRef} className="min-h-screen snap-start flex flex-col items-center justify-center px-4 relative">
         <div className="max-w-screen-md w-full mx-auto text-center">
           <h1
             className="text-6xl md:text-8xl font-black mb-6 tracking-tight"
