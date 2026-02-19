@@ -389,7 +389,7 @@ export default function LandingPage() {
       {/* Platform */}
       <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
-          <SectionTitle>Platform</SectionTitle>
+          <SectionTitle>Platforms</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
               <div
