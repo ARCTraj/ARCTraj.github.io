@@ -710,19 +710,19 @@ export default function LandingPage() {
               onImageClick={openLightbox}
             />
             <AppCard
-              src="/figures/ldcq_pipeline.png"
-              alt="Offline RL with latent diffusion model sampling and Q-network for action prediction"
-              title="Offline RL with Latent Diffusion"
-              description={<>Uses <a href="https://github.com/GIST-DSLab/LDCQ" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">LDCQ</a> to combine diffusion model sampling with Q-network evaluation, generating and selecting high-quality candidate actions in the latent space.</>}
-              links={[{ label: "arXiv '24", href: "https://arxiv.org/abs/2410.11324" }]}
-              onImageClick={openLightbox}
-            />
-            <AppCard
               src="/figures/world_model_learning.png"
               alt="DreamerV3 world model learning with encoder-decoder architecture for state prediction"
               title="World Model Learning"
               description={<>Applies <a href="https://github.com/GIST-DSLab/Dreamerv3onARCLE" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">DreamerV3</a> to learn a latent dynamics model that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning.</>}
               links={[{ label: "IJCAI '24 Workshop", href: "https://arxiv.org/abs/2408.14855" }]}
+              onImageClick={openLightbox}
+            />
+            <AppCard
+              src="/figures/ldcq_pipeline.png"
+              alt="Offline RL with latent diffusion model sampling and Q-network for action prediction"
+              title="Offline RL with Latent Diffusion"
+              description={<>Uses <a href="https://github.com/GIST-DSLab/LDCQ" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">LDCQ</a> to combine diffusion model sampling with Q-network evaluation, generating and selecting high-quality candidate actions in the latent space.</>}
+              links={[{ label: "arXiv '24", href: "https://arxiv.org/abs/2410.11324" }]}
               onImageClick={openLightbox}
             />
             <AppCard
