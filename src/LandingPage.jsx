@@ -123,7 +123,7 @@ function LinkButton({ href, children, external = true }) {
         href={href}
         target="_blank"
         rel="noopener noreferrer"
-        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white font-medium text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
+        className="inline-flex items-center gap-2 px-4 md:px-5 py-2.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white font-medium text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
       >
         {children}
       </a>
@@ -132,7 +132,7 @@ function LinkButton({ href, children, external = true }) {
   return (
     <Link
       to={href}
-      className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white font-medium text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
+      className="inline-flex items-center gap-2 px-4 md:px-5 py-2.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white font-medium text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
     >
       {children}
     </Link>
@@ -279,7 +279,7 @@ export default function LandingPage() {
       </div>
 
       {/* Hero Section */}
-      <section ref={heroRef} className="min-h-screen snap-start flex flex-col items-center justify-center px-4">
+      <section ref={heroRef} className="min-h-screen snap-start flex flex-col items-center justify-center px-4 relative">
         <div className="max-w-screen-md w-full mx-auto text-center">
           <h1
             className="text-6xl md:text-8xl font-black mb-6 tracking-tight"
@@ -313,7 +313,7 @@ export default function LandingPage() {
           <p className="text-sm text-[#5A9485] font-medium mb-8">
             KDD 2026 Datasets and Benchmarks
           </p>
-          <div className="flex flex-wrap justify-center gap-3">
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3">
             <LinkButton href="https://arxiv.org/abs/2511.11079">
               <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm-1 2l5 5h-5V4zm-3 13H8v-2h2v2zm4 0h-2v-2h2v2zm0-4H8v-2h6v2z" />
@@ -339,6 +339,19 @@ export default function LandingPage() {
             </LinkButton>
           </div>
         </div>
+        {/* Scroll indicator */}
+        <button
+          onClick={() => {
+            const next = heroRef.current?.nextElementSibling;
+            if (next) next.scrollIntoView({ behavior: "smooth" });
+          }}
+          className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-gray-500 hover:text-gray-300 transition-colors"
+          aria-label="Scroll down"
+        >
+          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M7 10l5 5 5-5" />
+          </svg>
+        </button>
       </section>
 
       {/* Abstract Section */}
