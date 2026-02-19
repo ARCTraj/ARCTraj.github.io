@@ -586,7 +586,7 @@ export default function LandingPage() {
                   Color Origins
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  66.5% of tasks are covered by test input colors alone; 100% with example outputs added.
+                  66.5% of tasks are covered by test input colors alone; 100% with example outputs added. Our follow-up work, <a href="https://arxiv.org/abs/2411.18158" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCKG</a>, further leverages these color patterns through knowledge graphs to predict output grid size and color sets.
                 </p>
                 <table className="w-full text-xs">
                   <thead>
@@ -620,7 +620,7 @@ export default function LandingPage() {
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 mt-3 text-[#5A9485] text-xs font-medium hover:underline"
                 >
-                  Related: ARCKG — predicting output grid size &amp; color sets via knowledge graphs
+                  IJCAI '24 Workshop
                   <svg className="w-3 h-3 shrink-0" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
                   </svg>
@@ -707,7 +707,7 @@ export default function LandingPage() {
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>More from Our Group</SectionTitle>
           <p className="text-gray-300 leading-relaxed text-base mb-8">
-            Beyond ARCTraj, our group explores ARC from multiple angles — evaluating LLMs, rethinking task formats, and creating new datasets to advance abstract reasoning research.
+            Our group tackles ARC from multiple angles beyond trajectory analysis, from evaluating LLMs and rethinking task formats to creating new datasets for abstract reasoning.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
@@ -793,7 +793,7 @@ export default function LandingPage() {
                 <img src="/figures/TCP_intro.png" alt="TCP: Critic-guided program synthesis with feedback engine and strategy engine" className="w-full" />
               </div>
               <div className="p-5 flex-grow flex flex-col">
-                <h3 className="text-base font-semibold text-white mb-1.5">TCP</h3>
+                <h3 className="text-base font-semibold text-white mb-1.5">Critic-Guided Program Synthesis</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
                   Traces and corrects programs through critic-guided synthesis, iteratively refining generated code with multi-level feedback and adaptive strategies for visual reasoning on ARC.
                 </p>
