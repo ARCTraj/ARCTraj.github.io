@@ -617,13 +617,50 @@ export default function LandingPage() {
               </div>
             </div>
             {/* Shared Intentions */}
-            <FigureCard
-              src="/figures/uniqueness_analysis.png"
-              alt="Unique trajectory ratio distribution and example trajectory showing shared intentionality"
-              title="Shared Intentions"
-              description={<>Many tasks show convergent solving strategies, indicating common reasoning pathways across participants. Leveraging this shared intentionality as auxiliary supervision has been shown to <a href="https://dl.acm.org/doi/10.1145/3711896.3736831" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">improve task-solving performance</a>.</>}
-              onImageClick={openLightbox}
-            />
+            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors h-full flex flex-col">
+              <div
+                className="bg-white p-4 cursor-zoom-in"
+                onClick={() => openLightbox("/figures/uniqueness_analysis.png", "Unique trajectory ratio distribution and example trajectory showing shared intentionality")}
+              >
+                <img src="/figures/uniqueness_analysis.png" alt="Unique trajectory ratio distribution and example trajectory showing shared intentionality" className="w-full" />
+              </div>
+              <div className="p-5 flex-grow flex flex-col">
+                <h3 className="text-base font-semibold text-white mb-1.5">
+                  Shared Intentions
+                </h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                  Many tasks show convergent solving strategies, indicating common reasoning pathways across participants. Leveraging <a href="https://github.com/GIST-DSLab/IntentionLearning" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">this shared intentionality as auxiliary supervision</a> has been shown to improve task-solving performance.
+                </p>
+                <a
+                  href="https://dl.acm.org/doi/10.1145/3711896.3736831"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-auto text-[#5A9485] text-sm font-medium hover:underline"
+                >
+                  KDD 2025
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div className="mt-4 border border-[#212121] rounded-xl bg-[#141414] p-4 hover:border-[#333] transition-colors flex items-center justify-between gap-4">
+            <div>
+              <h3 className="text-sm font-semibold text-white mb-1">LLM Reasoning on ARC</h3>
+              <p className="text-gray-400 text-xs leading-relaxed">In-depth analysis of large language models' reasoning abilities through the lens of ARC, revealing systematic limitations in abstract pattern recognition.</p>
+            </div>
+            <a
+              href="https://dl.acm.org/doi/10.1145/3712701"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-[#5A9485] text-sm font-medium hover:underline shrink-0"
+            >
+              ACM TIST 2025
+              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+              </svg>
+            </a>
           </div>
         </div>
       </section>
@@ -637,10 +674,9 @@ export default function LandingPage() {
               src="/figures/decision_transformer.png"
               alt="Decision Transformer architecture for trajectory-based learning on ARC"
               title="Decision Transformer"
-              description={<>Applies <a href="https://github.com/GIST-DSLab/IntentionLearning" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Decision Transformer</a> to ARC by augmenting state representations with object-level information, then further incorporating action intention signals to improve generalization.</>}
+              description={<>Applies <a href="https://github.com/GIST-DSLab/ARC_DT" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Decision Transformer</a> to ARC by augmenting state representations with object-level information to mimic human problem-solving trajectories.</>}
               links={[
                 { label: "ICML '23 Workshop", href: "https://arxiv.org/abs/2306.08204" },
-                { label: "KDD '25", href: "https://dl.acm.org/doi/10.1145/3711896.3736831" },
               ]}
               onImageClick={openLightbox}
             />
