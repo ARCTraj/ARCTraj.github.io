@@ -386,7 +386,42 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* Platform */}
+      {/* Key Contributions Section */}
+      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+        <div className="max-w-screen-md mx-auto">
+          <SectionTitle>Key Contributions</SectionTitle>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {[
+              {
+                title: "Large-Scale Trajectory Dataset",
+                description: "~10,000 human reasoning trajectories across 400 ARC tasks, capturing fine-grained object-level interactions.",
+              },
+              {
+                title: "Object-Level Action Recording",
+                description: "Complete sequences of operations including selection, color changes, movements, rotations, and transformations with precise positional data.",
+              },
+              {
+                title: "Comprehensive Benchmarking",
+                description: "Analysis of human problem-solving strategies revealing selection biases, color attribution patterns, and shared intentionality.",
+              },
+              {
+                title: "New Research Directions",
+                description: "Enables studies in human reasoning analysis, trajectory-based learning, and AI systems that learn from human problem-solving.",
+              },
+            ].map((item) => (
+              <div
+                key={item.title}
+                className="border border-[#212121] rounded-xl p-6 bg-[#141414] hover:border-[#333] transition-colors"
+              >
+                <h3 className="text-lg font-semibold mb-3 text-white">{item.title}</h3>
+                <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Platforms */}
       <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Platforms</SectionTitle>
@@ -499,41 +534,6 @@ export default function LandingPage() {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Key Contributions Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
-        <div className="max-w-screen-md mx-auto">
-          <SectionTitle>Key Contributions</SectionTitle>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {[
-              {
-                title: "Large-Scale Trajectory Dataset",
-                description: "~10,000 human reasoning trajectories across 400 ARC tasks, capturing fine-grained object-level interactions.",
-              },
-              {
-                title: "Object-Level Action Recording",
-                description: "Complete sequences of operations including selection, color changes, movements, rotations, and transformations with precise positional data.",
-              },
-              {
-                title: "Comprehensive Benchmarking",
-                description: "Analysis of human problem-solving strategies revealing selection biases, color attribution patterns, and shared intentionality.",
-              },
-              {
-                title: "New Research Directions",
-                description: "Enables studies in human reasoning analysis, trajectory-based learning, and AI systems that learn from human problem-solving.",
-              },
-            ].map((item) => (
-              <div
-                key={item.title}
-                className="border border-[#212121] rounded-xl p-6 bg-[#141414] hover:border-[#333] transition-colors"
-              >
-                <h3 className="text-lg font-semibold mb-3 text-white">{item.title}</h3>
-                <p className="text-gray-400 text-sm leading-relaxed">{item.description}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
