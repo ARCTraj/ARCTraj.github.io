@@ -645,22 +645,30 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-          <div className="mt-4 border border-[#212121] rounded-xl bg-[#141414] p-4 hover:border-[#333] transition-colors flex items-center justify-between gap-4">
-            <div>
-              <h3 className="text-sm font-semibold text-white mb-1">LLM Reasoning on ARC</h3>
-              <p className="text-gray-400 text-xs leading-relaxed">In-depth analysis of large language models' reasoning abilities through the lens of ARC, revealing systematic limitations in abstract pattern recognition.</p>
-            </div>
-            <a
-              href="https://dl.acm.org/doi/10.1145/3712701"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[#5A9485] text-sm font-medium hover:underline shrink-0"
+          <div className="mt-4 border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
+            <div
+              className="bg-white p-4 cursor-zoom-in"
+              onClick={() => openLightbox("/figures/LoTH_Concepts-ARC.png", "LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity")}
             >
-              ACM TIST 2025
-              <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
-              </svg>
-            </a>
+              <img src="/figures/LoTH_Concepts-ARC.png" alt="LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity" className="w-full" />
+            </div>
+            <div className="p-5 flex items-center justify-between gap-4">
+              <div>
+                <h3 className="text-sm font-semibold text-white mb-1">LLM Reasoning on ARC</h3>
+                <p className="text-gray-400 text-xs leading-relaxed">In-depth analysis of large language models' reasoning abilities through the lens of ARC, revealing systematic limitations in abstract pattern recognition.</p>
+              </div>
+              <a
+                href="https://dl.acm.org/doi/10.1145/3712701"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-[#5A9485] text-sm font-medium hover:underline shrink-0"
+              >
+                ACM TIST 2025
+                <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                  <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                </svg>
+              </a>
+            </div>
           </div>
         </div>
       </section>
