@@ -743,9 +743,9 @@ export default function LandingPage() {
                 <img src="/figures/MCLARC_example.png" alt="MC-LARC: Multiple-choice format for ARC with language descriptions and distractors" className="w-full" />
               </div>
               <div className="p-5 flex-grow flex flex-col">
-                <h3 className="text-base font-semibold text-white mb-1.5">Multiple-Choice ARC</h3>
+                <h3 className="text-base font-semibold text-white mb-1.5">ARC as Multiple-Choice QA</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  <a href="https://mc-larc.github.io" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">MC-LARC</a> converts ARC into a multiple-choice format to evaluate broader cognitive stages of LLM reasoning, with a self-feedback framework to mitigate shortcut exploitation.
+                  <a href="https://mc-larc.github.io" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">MC-LARC</a> transforms the original ARC benchmark into a multiple-choice QA format, enabling evaluation of LLM reasoning beyond grid generation with a self-feedback framework to mitigate shortcut exploitation.
                 </p>
                 <a
                   href="https://aclanthology.org/2024.findings-emnlp.392/"
@@ -768,9 +768,9 @@ export default function LandingPage() {
                 <img src="/figures/GIFARC_pipeline.png" alt="GIFARC: GIF-based visual abstraction extraction and ARC-style task generation pipeline" className="w-full" />
               </div>
               <div className="p-5 flex-grow flex flex-col">
-                <h3 className="text-base font-semibold text-white mb-1.5">GIF-Grounded ARC Synthesis</h3>
+                <h3 className="text-base font-semibold text-white mb-1.5">Analogy-Driven ARC Task Generation</h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  <a href="https://gifarc.vercel.app/v1.2" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">GIFARC</a> pairs ARC-style tasks with human-intuitive analogies extracted from GIFs, grounding abstract visual transformations in everyday concepts to improve LLM reasoning.
+                  <a href="https://gifarc.vercel.app/v1.2" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">GIFARC</a> generates ARC-style tasks that encode analogies inherent in GIFs, building a dataset that grounds abstract visual transformations in everyday concepts to improve LLM reasoning.
                 </p>
                 <a
                   href="https://arxiv.org/abs/2505.20672"
