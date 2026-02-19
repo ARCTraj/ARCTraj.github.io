@@ -799,6 +799,56 @@ export default function LandingPage() {
                 </a>
               </div>
             </div>
+            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
+              <div
+                className="bg-white p-4 cursor-zoom-in"
+                onClick={() => openLightbox("/figures/TCP_intro.png", "TCP: Critic-guided program synthesis with feedback engine and strategy engine")}
+              >
+                <img src="/figures/TCP_intro.png" alt="TCP: Critic-guided program synthesis with feedback engine and strategy engine" className="w-full" />
+              </div>
+              <div className="p-5 flex-grow flex flex-col">
+                <h3 className="text-base font-semibold text-white mb-1.5">TCP</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                  Traces and corrects programs through critic-guided synthesis, iteratively refining generated code with multi-level feedback and adaptive strategies for visual reasoning on ARC.
+                </p>
+                <a
+                  href="https://openreview.net/forum?id=6sB1rHJ1BN"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-auto text-[#5A9485] text-sm font-medium hover:underline"
+                >
+                  AAAI 2026 Bridge
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+            <div className="border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors flex flex-col">
+              <div
+                className="bg-white p-4 cursor-zoom-in"
+                onClick={() => openLightbox("/figures/system_1_and_2.png", "System 1 vs System 2 reasoning for Human-AI alignment on ARC-AGI")}
+              >
+                <img src="/figures/system_1_and_2.png" alt="System 1 vs System 2 reasoning for Human-AI alignment on ARC-AGI" className="w-full" />
+              </div>
+              <div className="p-5 flex-grow flex flex-col">
+                <h3 className="text-base font-semibold text-white mb-1.5">System 2 Reasoning on ARC</h3>
+                <p className="text-gray-400 text-sm leading-relaxed mb-3">
+                  Explores System 2 reasoning for human-AI alignment, examining how deliberate, step-by-step thinking can improve generality and adaptivity on ARC-AGI.
+                </p>
+                <a
+                  href="https://arxiv.org/abs/2410.07866"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 mt-auto text-[#5A9485] text-sm font-medium hover:underline"
+                >
+                  NeurIPS 2024 Workshop
+                  <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                  </svg>
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </section>
