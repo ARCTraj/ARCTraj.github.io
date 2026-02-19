@@ -542,15 +542,8 @@ export default function LandingPage() {
       <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Analysis Highlights</SectionTitle>
-          <FigureCard
-            src="/figures/analysis_with_trajectory.png"
-            alt="Analysis pipeline: extracting selection biases, color origins, and shared intentions from ARCTraj dataset"
-            title="Overview"
-            description="From ARCTraj, we conduct three benchmarking analyses: selection biases in spatial focus, color origins in color usage patterns, and shared intentions in common problem-solving strategies across participants."
-            onImageClick={openLightbox}
-          />
           <div
-            className="mt-8 grid grid-cols-1 md:grid-cols-[3fr_4fr_5fr] gap-6"
+            className="grid grid-cols-1 md:grid-cols-[3fr_4fr_5fr] gap-6"
           >
             {/* Selection Biases */}
             <FigureCard
@@ -645,7 +638,7 @@ export default function LandingPage() {
               </div>
             </div>
           </div>
-          <div className="mt-4 border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
+          <div className="mt-6 border border-[#212121] rounded-xl bg-[#141414] overflow-hidden hover:border-[#333] transition-colors">
             <div
               className="bg-white p-4 cursor-zoom-in"
               onClick={() => openLightbox("/figures/LoTH_Concepts-ARC.png", "LLM Reasoning on ARC: Logical Coherence, Compositionality, and Productivity")}
@@ -654,8 +647,8 @@ export default function LandingPage() {
             </div>
             <div className="p-5 flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-sm font-semibold text-white mb-1">LLM Reasoning on ARC</h3>
-                <p className="text-gray-400 text-xs leading-relaxed">In-depth analysis of large language models' reasoning abilities through the lens of ARC, revealing systematic limitations in abstract pattern recognition.</p>
+                <h3 className="text-sm font-semibold text-white mb-1">Interested in how LLMs reason on ARC?</h3>
+                <p className="text-gray-400 text-xs leading-relaxed">We also explore how large language models tackle ARC, uncovering where they struggle with abstract pattern recognition.</p>
               </div>
               <a
                 href="https://dl.acm.org/doi/10.1145/3712701"
