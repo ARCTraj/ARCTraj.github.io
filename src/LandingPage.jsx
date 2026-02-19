@@ -403,7 +403,7 @@ export default function LandingPage() {
                   O2ARC 3.0
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  While <a href="https://arcprize.org/play" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">existing platforms</a> only support pixel-level grid editing, <a href="https://o2arc.com/" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">O2ARC 3.0</a> (Object-Oriented ARC) introduces object-level operations such as selection, movement, rotation, and copy-paste. This richer action space captures how humans actually reason about ARC tasks, and every action is recorded as a structured trajectory with precise positional and temporal information.
+                  ARCTraj is collected through <a href="https://o2arc.com/" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">O2ARC 3.0</a> (Object-Oriented ARC), an interactive platform that goes beyond <a href="https://arcprize.org/play" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">existing pixel-level editors</a> by introducing object-level operations such as movement, rotation, and flip. Every action is recorded as a structured trajectory with precise positional and temporal information.
                 </p>
                 <a
                   href="https://www.ijcai.org/proceedings/2024/1034"
