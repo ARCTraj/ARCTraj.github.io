@@ -345,10 +345,10 @@ export default function LandingPage() {
             const next = heroRef.current?.nextElementSibling;
             if (next) next.scrollIntoView({ behavior: "smooth" });
           }}
-          className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce text-gray-500 hover:text-gray-300 transition-colors"
+          className="absolute bottom-12 left-1/2 -translate-x-1/2 animate-bounce text-gray-500 hover:text-gray-300 transition-colors"
           aria-label="Scroll down"
         >
-          <svg className="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+          <svg className="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
             <path d="M7 10l5 5 5-5" />
           </svg>
         </button>
