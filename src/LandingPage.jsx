@@ -676,7 +676,7 @@ export default function LandingPage() {
                   Shared Intentions
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-3">
-                  Many tasks show convergent solving strategies, indicating common reasoning pathways across participants. Leveraging <a href="https://github.com/GIST-DSLab/IntentionLearning" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">this shared intentionality as auxiliary supervision</a> has been shown to improve task-solving performance.
+                  Many tasks show convergent solving strategies, indicating common reasoning pathways across participants. Leveraging <a href="https://github.com/GIST-DSLab/IntentionLearning" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">shared intentionality</a> as auxiliary supervision has been shown to improve task-solving performance.
                 </p>
                 <a
                   href="https://dl.acm.org/doi/10.1145/3711896.3736831"
