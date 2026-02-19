@@ -710,14 +710,6 @@ export default function LandingPage() {
               onImageClick={openLightbox}
             />
             <AppCard
-              src="/figures/gflownet_diagram.png"
-              alt="GFlowNet action generation and state transition through ARCLE"
-              title="Generative Flow Networks"
-              description={<>Applies <a href="https://github.com/GIST-DSLab/GFN_to_ARC" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">GFlowNet</a> to sample diverse action sequences proportional to a reward function, exploring multiple solving strategies rather than converging on a single trajectory.</>}
-              links={[{ label: "TMLR '25", href: "https://tmlr.infinite-conf.org/paper_pages/ULCOhBgGzy.html" }]}
-              onImageClick={openLightbox}
-            />
-            <AppCard
               src="/figures/ldcq_pipeline.png"
               alt="Offline RL with latent diffusion model sampling and Q-network for action prediction"
               title="Offline RL with Latent Diffusion"
@@ -731,6 +723,14 @@ export default function LandingPage() {
               title="World Model Learning"
               description={<>Applies <a href="https://github.com/GIST-DSLab/Dreamerv3onARCLE" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">DreamerV3</a> to learn a latent dynamics model that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning.</>}
               links={[{ label: "IJCAI '24 Workshop", href: "https://arxiv.org/abs/2408.14855" }]}
+              onImageClick={openLightbox}
+            />
+            <AppCard
+              src="/figures/gflownet_diagram.png"
+              alt="GFlowNet action generation and state transition through ARCLE"
+              title="Generative Flow Networks"
+              description={<>Applies <a href="https://github.com/GIST-DSLab/GFN_to_ARC" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">GFlowNet</a> to sample diverse action sequences proportional to a reward function, exploring multiple solving strategies rather than converging on a single trajectory.</>}
+              links={[{ label: "TMLR '25", href: "https://tmlr.infinite-conf.org/paper_pages/ULCOhBgGzy.html" }]}
               onImageClick={openLightbox}
             />
           </div>
