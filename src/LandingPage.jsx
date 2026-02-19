@@ -554,9 +554,9 @@ export default function LandingPage() {
                 <tbody className="divide-y divide-[#212121]">
                   {[
                     ["Number of trajectories", "10,672"],
-                    ["Avg. participants per task", "13.9"],
-                    ["Avg. trajectories per task", "25.5"],
-                    ["Mean trajectory length", "9.8 steps"],
+                    ["Average participants per task", "13.9"],
+                    ["Average trajectories per task", "25.5"],
+                    ["Average trajectory length", "9.8 steps"],
                     ["Success rate", "82.3%"],
                     ["Object-related operations", "37.7%"],
                     ["Cross-trajectory shared grids", "43.7%"],
