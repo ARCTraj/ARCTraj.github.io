@@ -430,7 +430,7 @@ export default function LandingPage() {
                   ARCLE
                 </h3>
                 <p className="text-gray-400 text-sm leading-relaxed mb-4">
-                  ARCLE (Abstraction and Reasoning Corpus Learning Environment) is a Gymnasium-based RL environment that defines structured action and observation spaces for ARC tasks. It provides the foundation for training RL agents on ARC, enabling the trajectory-based learning approaches in downstream applications.
+                  <a href="https://github.com/ConfeitoHS/arcle" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">ARCLE</a> (Abstraction and Reasoning Corpus Learning Environment) is a Gymnasium-based RL environment that defines structured action and observation spaces for ARC tasks. It provides the foundation for training RL agents on ARC, enabling the trajectory-based learning approaches in downstream applications.
                 </p>
                 <a
                   href="https://proceedings.mlr.press/v274/lee25a.html"
@@ -637,7 +637,7 @@ export default function LandingPage() {
               src="/figures/decision_transformer.png"
               alt="Decision Transformer architecture for trajectory-based learning on ARC"
               title="Decision Transformer"
-              description="Applies Decision Transformer to ARC by augmenting state representations with object-level information, then further incorporating action intention signals to improve generalization."
+              description={<>Applies <a href="https://github.com/GIST-DSLab/IntentionLearning" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">Decision Transformer</a> to ARC by augmenting state representations with object-level information, then further incorporating action intention signals to improve generalization.</>}
               links={[
                 { label: "ICML '23 Workshop", href: "https://arxiv.org/abs/2306.08204" },
                 { label: "KDD '25", href: "https://dl.acm.org/doi/10.1145/3711896.3736831" },
@@ -648,7 +648,7 @@ export default function LandingPage() {
               src="/figures/gflownet_diagram.png"
               alt="GFlowNet action generation and state transition through ARCLE"
               title="GFlowNet"
-              description="Generates diverse action sequences by modeling the distribution over trajectories proportional to a reward function."
+              description={<>Generates diverse action sequences by modeling the <a href="https://github.com/GIST-DSLab/GFN_to_ARC" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">distribution over trajectories</a> proportional to a reward function.</>}
               links={[{ label: "TMLR '25", href: "https://tmlr.infinite-conf.org/paper_pages/ULCOhBgGzy.html" }]}
               onImageClick={openLightbox}
             />
@@ -656,7 +656,7 @@ export default function LandingPage() {
               src="/figures/ldcq_pipeline.png"
               alt="Offline RL with latent diffusion model sampling and Q-network for action prediction"
               title="Offline RL with Latent Diffusion"
-              description="Combines diffusion model sampling with Q-network evaluation to generate and select high-quality candidate actions in the latent space."
+              description={<>Combines <a href="https://github.com/GIST-DSLab/LDCQ" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">diffusion model sampling with Q-network evaluation</a> to generate and select high-quality candidate actions in the latent space.</>}
               links={[{ label: "arXiv '24", href: "https://arxiv.org/abs/2410.11324" }]}
               onImageClick={openLightbox}
             />
@@ -664,7 +664,7 @@ export default function LandingPage() {
               src="/figures/world_model_learning.png"
               alt="DreamerV3 world model learning with encoder-decoder architecture for state prediction"
               title="DreamerV3"
-              description="Learns a latent dynamics model that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning."
+              description={<>Learns a <a href="https://github.com/GIST-DSLab/Dreamerv3onARCLE" target="_blank" rel="noopener noreferrer" className="text-[#5A9485] hover:underline">latent dynamics model</a> that encodes grid states and predicts future states given actions, enabling planning and imagination-based reasoning.</>}
               links={[{ label: "IJCAI '24 Workshop", href: "https://arxiv.org/abs/2408.14855" }]}
               onImageClick={openLightbox}
             />
