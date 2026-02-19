@@ -554,9 +554,8 @@ export default function LandingPage() {
                 <tbody className="divide-y divide-[#212121]">
                   {[
                     ["Number of trajectories", "10,672"],
-                    ["Number of unique ARC tasks", "400"],
                     ["Number of users", "100"],
-                    ["Mean trajectory length", "9.8"],
+                    ["Mean trajectory length", "9.8 steps"],
                     ["Success rate", "82.3%"],
                     ["Object-related operations", "37.7%"],
                     ["Cross-trajectory shared grids", "43.7%"],
