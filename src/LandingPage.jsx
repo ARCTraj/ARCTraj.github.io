@@ -146,6 +146,7 @@ export default function LandingPage() {
   const wrapperRef = useRef(null);
   const heroRef = useRef(null);
   const [showNav, setShowNav] = useState(false);
+  const [activeSection, setActiveSection] = useState(null);
   const openLightbox = useCallback((src, alt) => setLightbox({ src, alt }), []);
   const closeLightbox = useCallback(() => setLightbox(null), []);
 
@@ -158,6 +159,37 @@ export default function LandingPage() {
       { root: null, threshold: 0.1 }
     );
     observer.observe(hero);
+    return () => observer.disconnect();
+  }, []);
+
+  const OUTLINE_SECTIONS = [
+    { id: "abstract", label: "Abstract" },
+    { id: "contributions", label: "Contributions" },
+    { id: "platforms", label: "Platforms" },
+    { id: "construction", label: "Construction" },
+    { id: "analysis", label: "Analysis" },
+    { id: "downstream", label: "Downstream" },
+    { id: "group", label: "Our Group" },
+    { id: "demo", label: "Demo" },
+    { id: "citation", label: "Citation" },
+  ];
+
+  useEffect(() => {
+    const ids = OUTLINE_SECTIONS.map((s) => s.id);
+    const els = ids.map((id) => document.getElementById(id)).filter(Boolean);
+    if (!els.length) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            setActiveSection(entry.target.id);
+          }
+        }
+      },
+      { root: null, rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    els.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
   }, []);
 
@@ -241,6 +273,19 @@ export default function LandingPage() {
   return (
     <div ref={wrapperRef} className="bg-[#0E0E0E] text-white">
       {lightbox && <Lightbox src={lightbox.src} alt={lightbox.alt} onClose={closeLightbox} />}
+
+      {/* Outline nav (PC only) */}
+      <nav className={`fixed right-6 top-1/2 -translate-y-1/2 z-40 hidden xl:flex flex-col gap-3 transition-all duration-300 ${showNav ? "opacity-100" : "opacity-0 pointer-events-none"}`}>
+        {OUTLINE_SECTIONS.map((s) => (
+          <button
+            key={s.id}
+            onClick={() => document.getElementById(s.id)?.scrollIntoView({ behavior: "smooth" })}
+            className={`text-right text-xs transition-colors ${activeSection === s.id ? "text-[#5A9485] font-medium" : "text-gray-600 hover:text-gray-400"}`}
+          >
+            {s.label}
+          </button>
+        ))}
+      </nav>
 
       {/* Fixed bottom nav */}
       <div className={`fixed bottom-0 left-0 right-0 z-40 bg-[#0E0E0E]/90 backdrop-blur-sm border-t border-[#212121] py-3 px-4 transition-all duration-300 ${showNav ? "translate-y-0 opacity-100" : "translate-y-full opacity-0"}`}>
@@ -355,7 +400,7 @@ export default function LandingPage() {
       </section>
 
       {/* Abstract Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="abstract" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-lg mx-auto">
           <SectionTitle>Abstract</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 items-end">
@@ -387,7 +432,7 @@ export default function LandingPage() {
       </section>
 
       {/* Key Contributions Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="contributions" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Key Contributions</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -422,7 +467,7 @@ export default function LandingPage() {
       </section>
 
       {/* Platforms */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="platforms" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Platforms</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -485,7 +530,7 @@ export default function LandingPage() {
       </section>
 
       {/* Dataset Construction */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="construction" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Dataset Construction</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -539,7 +584,7 @@ export default function LandingPage() {
       </section>
 
       {/* Analysis Highlights Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="analysis" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Analysis Highlights</SectionTitle>
           <FigureCard
@@ -660,7 +705,7 @@ export default function LandingPage() {
       </section>
 
       {/* Downstream Applications Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="downstream" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Downstream Applications</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -703,7 +748,7 @@ export default function LandingPage() {
       </section>
 
       {/* More from Our Group */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="group" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>More from Our Group</SectionTitle>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -812,7 +857,7 @@ export default function LandingPage() {
       </section>
 
       {/* Interactive Demo Guide */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="demo" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Interactive Demo</SectionTitle>
           <p className="text-gray-300 leading-relaxed text-base mb-8">
@@ -866,7 +911,7 @@ export default function LandingPage() {
       </section>
 
       {/* BibTeX / Footer Section */}
-      <section className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
+      <section id="citation" className="min-h-screen snap-start border-t border-[#212121] py-20 px-4 flex flex-col justify-center">
         <div className="max-w-screen-md mx-auto">
           <SectionTitle>Citation</SectionTitle>
           <div className="relative bg-[#141414] border border-[#212121] rounded-xl p-6">
