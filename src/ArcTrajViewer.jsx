@@ -135,6 +135,12 @@ export default function ArcTrajViewer() {
             continue;
           }
 
+          // Filter out bad trajectories: Paste appears before any Copy
+          const actions = trajectory.map(t => t.action);
+          const firstPaste = actions.indexOf("Paste");
+          const firstCopy = actions.indexOf("Copy");
+          if (firstPaste !== -1 && (firstCopy === -1 || firstPaste < firstCopy)) continue;
+
           if (!grouped[rawTaskId]) grouped[rawTaskId] = [];
           grouped[rawTaskId].push({
             logId: Number(logId),
