@@ -299,7 +299,7 @@ export default function ArcTrajViewer() {
         </div>
         <div className="flex gap-2 shrink-0">
           <a
-            href="https://arctraj.github.io/"
+            href="https://dl.acm.org/doi/10.1145/3770854.3785683/"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 px-2 md:px-3 py-1.5 rounded-lg bg-[#1a1a1a] border border-[#333] text-white text-sm hover:border-[#5A9485] hover:bg-[#1f2f2b] transition-colors"
